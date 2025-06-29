@@ -1,0 +1,30 @@
+<div class="min-h-screen bg-gray-50 pt-20">
+  <div class="max-w-7xl mx-auto section-padding">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Search Destinations</h1>
+      <p class="text-xl text-gray-600">Find your perfect getaway</p>
+    </div>
+    
+    <div class="card p-8 max-w-2xl mx-auto">
+      <div class="space-y-4">
+        <input 
+          type="text" 
+          placeholder="Search for destinations..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+        />
+        <button class="btn-primary w-full py-3">
+          Search
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <div class="bg-primary-50 rounded-lg p-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h3>
+        <p class="text-gray-600">We're building an amazing search experience for you. Stay tuned!</p>
+      </div>
+    </div>
+  </div>
+</div>

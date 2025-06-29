@@ -1,0 +1,231 @@
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 overflow-hidden">
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+  
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img 
+      src="https://images.pexels.com/photos/1134166/pexels-photo-1134166.jpeg?auto=compress&cs=tinysrgb&w=1920"
+      alt="Beautiful travel destination"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <div class="relative max-w-7xl mx-auto section-padding min-h-screen flex items-center">
+    <div class="max-w-3xl animate-fade-in">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        Your Next
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-yellow-400">
+          Adventure
+        </span>
+        Starts Here
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
+        Discover extraordinary places, book with confidence, and create memories that last a lifetime. 
+        Your perfect getaway is just one click away.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button class="btn-primary text-lg px-8 py-4">
+          Start Exploring
+        </button>
+        <button class="btn-secondary text-lg px-8 py-4 bg-white/10 border-white/30 text-white hover:bg-white/20">
+          Learn More
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+  <div class="absolute bottom-32 left-10 w-16 h-16 bg-accent-500/20 rounded-full animate-float" style="animation-delay: 2s;"></div>
+  <div class="absolute top-1/2 right-1/4 w-12 h-12 bg-yellow-400/20 rounded-full animate-float" style="animation-delay: 4s;"></div>
+</section>
+
+<!-- Search Bar Section -->
+<section class="bg-white shadow-xl relative -mt-16 mx-4 sm:mx-8 lg:mx-16 rounded-2xl z-10">
+  <div class="p-6 lg:p-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-gray-700">Where to?</label>
+        <input 
+          type="text" 
+          placeholder="Search destinations..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+        />
+      </div>
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-gray-700">Check-in</label>
+        <input 
+          type="date"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+        />
+      </div>
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-gray-700">Check-out</label>
+        <input 
+          type="date"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+        />
+      </div>
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-gray-700">Guests</label>
+        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+          <option>1 Guest</option>
+          <option>2 Guests</option>
+          <option>3 Guests</option>
+          <option>4+ Guests</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-6 text-center">
+      <button class="btn-primary px-12 py-4 text-lg">
+        🔍 Search Now
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="bg-gray-50 section-padding">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      @for (stat of stats(); track stat.label) {
+        <div class="text-center animate-slide-up">
+          <div class="text-4xl md:text-5xl font-bold text-primary-600 mb-2">{{ stat.number }}</div>
+          <div class="text-gray-600 font-medium">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Featured Bookings Section -->
+<section class="section-padding bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Featured Destinations
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Handpicked by our travel experts for unforgettable experiences
+      </p>
+    </div>
+
+    @if (isLoading()) {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (item of [1,2,3]; track item) {
+          <div class="card p-6 animate-pulse">
+            <div class="w-full h-48 bg-gray-200 rounded-lg mb-4"></div>
+            <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
+            <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        }
+      </div>
+    } @else if (error()) {
+      <div class="text-center py-12">
+        <div class="text-red-500 text-lg mb-4">{{ error() }}</div>
+        <button class="btn-primary" (click)="loadFeaturedBookings()">
+          Try Again
+        </button>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (booking of featuredBookings(); track booking.id) {
+          <div class="card overflow-hidden group">
+            <div class="relative overflow-hidden">
+              <img 
+                [src]="booking.image" 
+                [alt]="booking.title"
+                class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                <span class="text-sm font-semibold text-gray-800">${{ booking.price }}/night</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="inline-block px-3 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-full">
+                  {{ booking.location }}
+                </span>
+                <div class="flex items-center space-x-1">
+                  @for (star of getStarArray(booking.rating); track $index) {
+                    <span class="text-yellow-400">⭐</span>
+                  }
+                  <span class="text-sm text-gray-600 ml-1">{{ booking.rating }} ({{ booking.reviewCount }})</span>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{{ booking.title }}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-2">{{ booking.description }}</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                @for (amenity of booking.amenities.slice(0, 3); track amenity) {
+                  <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">{{ amenity }}</span>
+                }
+                @if (booking.amenities.length > 3) {
+                  <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">+{{ booking.amenities.length - 3 }} more</span>
+                }
+              </div>
+              <button class="btn-primary w-full">
+                Book Now
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="text-center mt-12">
+      <a routerLink="/search" class="btn-secondary px-8 py-3">
+        View All Destinations
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section-padding bg-gradient-to-br from-primary-50 to-accent-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Why Choose BookEase?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        We make booking simple, secure, and memorable
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (feature of features(); track feature.title) {
+        <div class="text-center group">
+          <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center text-4xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+            {{ feature.icon }}
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ feature.title }}</h3>
+          <p class="text-gray-600 leading-relaxed">{{ feature.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+      Ready for Your Next Adventure?
+    </h2>
+    <p class="text-xl mb-8 opacity-90">
+      Join thousands of happy travelers who trust BookEase for their perfect getaways. 
+      Start planning your dream trip today!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button class="btn-primary bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg">
+        Start Booking Now
+      </button>
+      <button class="btn-secondary border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+        Download Our App
+      </button>
+    </div>
+  </div>
+</section>
