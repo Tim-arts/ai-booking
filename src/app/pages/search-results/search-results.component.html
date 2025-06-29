@@ -83,7 +83,7 @@
                   [min]="priceRange().min"
                   [max]="priceRange().max"
                   [step]="10"
-                  (onSlideEnd)="onPriceFilterChange($event.value as number)"
+                  (onSlideEnd)="onPriceFilterChange($event)"
                   styleClass="w-full">
                 </p-slider>
                 <div class="flex justify-between text-sm text-gray-500 mt-2">
