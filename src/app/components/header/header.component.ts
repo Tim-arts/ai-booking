@@ -39,8 +39,15 @@ export class HeaderComponent {
   }
 
   onAuthSuccess(event: { user: any; isLogin: boolean }): void {
-    console.log(`${event.isLogin ? 'Login' : 'Registration'} successful:`, event.user);
-    this.closeAuthModal();
+    this.authService.login({ email: event.user.email, password: 'password' }).subscribe({
+      next: () => {
+        console.log(`${event.isLogin ? 'Login' : 'Registration'} successful:`, event.user);
+        this.closeAuthModal();
+      },
+      error: (error) => {
+        console.error('Auth error:', error);
+      }
+    });
   }
 
   onLogout(): void {

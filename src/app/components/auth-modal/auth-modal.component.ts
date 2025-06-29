@@ -62,9 +62,11 @@ export class AuthModalComponent {
   constructor() {
     // Reset forms when switching modes
     effect(() => {
-      this.authError.set(null);
-      this.loginForm.reset();
-      this.registerForm.reset();
+      if (this.isLoginMode()) {
+        this.authError.set(null);
+        this.loginForm.reset();
+        this.registerForm.reset();
+      }
     });
   }
 
