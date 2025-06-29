@@ -8,19 +8,11 @@
   (onHide)="closeModal()">
   
   <ng-template pTemplate="header">
-    <div class="flex items-center justify-between w-full">
-      <div class="flex items-center space-x-2">
-        <i class="pi pi-user text-primary-600"></i>
-        <span class="text-xl font-bold text-gray-900">
-          {{ isLoginMode() ? 'Welcome Back' : 'Create Account' }}
-        </span>
-      </div>
-      <button 
-        type="button"
-        (click)="closeModal()"
-        class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md p-1">
-        <i class="pi pi-times text-lg"></i>
-      </button>
+    <div class="flex items-center space-x-2">
+      <i class="pi pi-user text-primary-600"></i>
+      <span class="text-xl font-bold text-gray-900">
+        {{ isLoginMode() ? 'Welcome Back' : 'Create Account' }}
+      </span>
     </div>
   </ng-template>
 
