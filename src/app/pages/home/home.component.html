@@ -52,87 +52,79 @@
 <section class="bg-white shadow-xl relative -mt-16 mx-4 sm:mx-8 lg:mx-16 rounded-2xl z-10">
   <p-panel [toggleable]="false" styleClass="border-0 shadow-none">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+      <!-- Destination -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Where to?</label>
-        <div class="search-input-group">
-          <p-inputGroup styleClass="w-full">
-            <p-inputGroupAddon>
-              <i class="pi pi-map-marker"></i>
-            </p-inputGroupAddon>
-            <input 
-              pInputText
-              type="text" 
-              placeholder="Search destinations..."
-              class="search-form-control"
-              [(ngModel)]="searchForm.destination"
-            />
-          </p-inputGroup>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-map-marker search-icon"></i>
+          <input 
+            pInputText
+            type="text" 
+            placeholder="Search destinations..."
+            [(ngModel)]="searchForm.destination"
+          />
         </div>
       </div>
       
+      <!-- Check-in -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-in</label>
-        <div class="search-input-group">
-          <p-inputGroup styleClass="w-full">
-            <p-inputGroupAddon>
-              <i class="pi pi-calendar"></i>
-            </p-inputGroupAddon>
-            <p-calendar 
-              inputId="checkin"
-              placeholder="Select check-in date"
-              [showIcon]="false"
-              [minDate]="minDate"
-              [maxDate]="maxCheckInDate()"
-              dateFormat="mm/dd/yy"
-              styleClass="w-full"
-              inputStyleClass="search-form-control"
-              [(ngModel)]="searchForm.checkIn"
-              (onSelect)="onCheckInSelect($event)">
-            </p-calendar>
-          </p-inputGroup>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-calendar search-icon"></i>
+          <p-calendar 
+            inputId="checkin"
+            placeholder="Select check-in date"
+            [showIcon]="false"
+            [minDate]="minDate"
+            [maxDate]="maxCheckInDate()"
+            dateFormat="mm/dd/yy"
+            [(ngModel)]="searchForm.checkIn"
+            (onSelect)="onCheckInSelect($event)">
+          </p-calendar>
         </div>
       </div>
       
+      <!-- Check-out -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-out</label>
-        <div class="search-input-group">
-          <p-inputGroup styleClass="w-full">
-            <p-inputGroupAddon>
-              <i class="pi pi-calendar"></i>
-            </p-inputGroupAddon>
-            <p-calendar 
-              inputId="checkout"
-              placeholder="Select check-out date"
-              [showIcon]="false"
-              [minDate]="minCheckOutDate()"
-              [maxDate]="maxCheckOutDate()"
-              dateFormat="mm/dd/yy"
-              styleClass="w-full"
-              inputStyleClass="search-form-control"
-              [(ngModel)]="searchForm.checkOut"
-              [disabled]="!searchForm.checkIn">
-            </p-calendar>
-          </p-inputGroup>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-calendar search-icon"></i>
+          <p-calendar 
+            inputId="checkout"
+            placeholder="Select check-out date"
+            [showIcon]="false"
+            [minDate]="minCheckOutDate()"
+            [maxDate]="maxCheckOutDate()"
+            dateFormat="mm/dd/yy"
+            [(ngModel)]="searchForm.checkOut"
+            [disabled]="!searchForm.checkIn">
+          </p-calendar>
         </div>
       </div>
       
+      <!-- Guests -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Guests</label>
-        <div class="search-input-group">
-          <p-inputGroup styleClass="w-full">
-            <p-inputGroupAddon>
-              <i class="pi pi-users"></i>
-            </p-inputGroupAddon>
-            <p-dropdown 
-              [options]="guestOptions()"
-              placeholder="Select guests"
-              optionLabel="label"
-              optionValue="value"
-              styleClass="w-full"
-              panelStyleClass="search-form-control"
-              [(ngModel)]="searchForm.guests">
-            </p-dropdown>
-          </p-inputGroup>
+        <div class="search-field">
+          <p-dropdown 
+            [options]="guestOptions()"
+            placeholder="Select guests"
+            optionLabel="label"
+            optionValue="value"
+            [(ngModel)]="searchForm.guests">
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="flex items-center">
+                <i class="pi pi-users mr-2 text-gray-500"></i>
+                <span>{{ selectedOption?.label || 'Select guests' }}</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="item" let-option>
+              <div class="flex items-center">
+                <i class="pi pi-users mr-2 text-gray-500"></i>
+                <span>{{ option.label }}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
         </div>
       </div>
     </div>
