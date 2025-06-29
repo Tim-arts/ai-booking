@@ -39,7 +39,8 @@ export class HeaderComponent {
 
   onAuthSuccess(event: { user: any; isLogin: boolean }): void {
     console.log(`${event.isLogin ? 'Login' : 'Registration'} successful:`, event.user);
-    // Modal will close itself via the closeModal() call in auth-modal component
+    // Ensure modal is closed
+    this.closeAuthModal();
   }
 
   onLogout(): void {

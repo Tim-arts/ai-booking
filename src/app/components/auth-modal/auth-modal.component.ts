@@ -65,9 +65,24 @@ export class AuthModalComponent {
   constructor() {
     // Reset forms when switching modes
     effect(() => {
-      this.authError.set(null);
-      this.loginForm.reset();
-      this.registerForm.reset();
+      if (this.isLoginMode()) {
+        this.authError.set(null);
+        this.loginForm.reset();
+      } else {
+        this.authError.set(null);
+        this.registerForm.reset();
+      }
+    });
+
+    // Reset everything when modal closes
+    effect(() => {
+      if (!this.isOpen()) {
+        this.authError.set(null);
+        this.isLoading.set(false);
+        this.loginForm.reset();
+        this.registerForm.reset();
+        this.isLoginMode.set(true);
+      }
     });
   }
 
@@ -88,9 +103,12 @@ export class AuthModalComponent {
 
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (user) => {
-          this.authSuccess.emit({ user, isLogin: true });
-          this.closeModal();
           this.isLoading.set(false);
+          this.authSuccess.emit({ user, isLogin: true });
+          // Close modal after successful login
+          setTimeout(() => {
+            this.closeModal();
+          }, 100);
         },
         error: (error) => {
           this.authError.set('Invalid email or password. Try demo@bookease.com / password');
@@ -114,9 +132,12 @@ export class AuthModalComponent {
         password: formData.password!
       }).subscribe({
         next: (user) => {
-          this.authSuccess.emit({ user, isLogin: false });
-          this.closeModal();
           this.isLoading.set(false);
+          this.authSuccess.emit({ user, isLogin: false });
+          // Close modal after successful registration
+          setTimeout(() => {
+            this.closeModal();
+          }, 100);
         },
         error: (error) => {
           this.authError.set('Registration failed. Please try again.');
