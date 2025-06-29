@@ -25,7 +25,6 @@ export class UserMenuComponent {
 
   readonly menuItems = computed((): MenuItem[] => [
     {
-      separator: true,
       template: `
         <div class="px-4 py-3 border-b border-gray-100">
           <div class="flex items-center space-x-3">
@@ -39,6 +38,9 @@ export class UserMenuComponent {
           </div>
         </div>
       `
+    },
+    {
+      separator: true
     },
     {
       label: 'My Profile',
