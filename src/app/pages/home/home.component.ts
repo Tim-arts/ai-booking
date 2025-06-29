@@ -51,8 +51,8 @@ export class HomeComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
 
-  // Search form data
-  searchForm: SearchForm = {
+  // Search form data - make it a public property
+  public searchForm: SearchForm = {
     destination: '',
     checkIn: null,
     checkOut: null,
