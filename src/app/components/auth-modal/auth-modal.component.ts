@@ -94,6 +94,12 @@ export class AuthModalComponent {
     this.close.emit();
   }
 
+  onVisibilityChange(visible: boolean): void {
+    if (!visible) {
+      this.closeModal();
+    }
+  }
+
   onLogin(): void {
     if (this.loginForm.valid) {
       this.isLoading.set(true);
