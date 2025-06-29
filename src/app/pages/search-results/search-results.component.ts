@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
 import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
-import { SliderModule } from 'primeng/slider';
+import { SliderModule, SliderSlideEndEvent } from 'primeng/slider';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { FormsModule } from '@angular/forms';
@@ -142,7 +142,8 @@ export class SearchResultsComponent implements OnInit {
     this.sortBy.set(sortValue);
   }
 
-  onPriceFilterChange(maxPrice: number): void {
+  onPriceFilterChange(event: SliderSlideEndEvent): void {
+    const maxPrice = Array.isArray(event.value) ? event.value[0] : event.value;
     this.filters.update(f => ({ ...f, maxPrice }));
   }
 
