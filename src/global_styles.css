@@ -34,38 +34,58 @@ body {
   overflow: hidden;
 }
 
-/* Fix for PrimeNG InputGroup with Calendar components */
-.p-inputgroup .p-calendar {
-  flex: 1 1 auto;
-  width: 100% !important;
+/* Search form input group consistency */
+.search-input-group {
+  display: flex;
+  width: 100%;
 }
 
-.p-inputgroup .p-calendar .p-inputtext {
+.search-input-group .p-inputgroup {
+  width: 100%;
+  display: flex;
+}
+
+.search-input-group .p-inputgroup-addon {
+  flex-shrink: 0;
+  min-width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-right: 0;
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.search-input-group .p-inputtext,
+.search-input-group .p-calendar .p-inputtext,
+.search-input-group .p-dropdown .p-dropdown-label {
+  flex: 1;
   width: 100% !important;
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
   border-left: 0 !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+  height: 2.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
-.p-inputgroup .p-dropdown {
-  flex: 1 1 auto;
-  width: 100% !important;
+.search-input-group .p-calendar,
+.search-input-group .p-dropdown {
+  flex: 1;
+  width: 100%;
 }
 
-.p-inputgroup .p-dropdown .p-dropdown-label {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-left: 0 !important;
+.search-input-group .p-dropdown .p-dropdown-trigger {
+  border-left: 0;
 }
 
 /* Calendar specific fixes */
-.p-calendar.p-calendar-w-btn .p-inputtext {
-  border-top-right-radius: 0.375rem !important;
-  border-bottom-right-radius: 0.375rem !important;
+.search-input-group .p-calendar .p-datepicker {
+  min-width: 300px;
 }
 
-.p-calendar .p-datepicker {
-  min-width: 300px;
+/* Ensure consistent height for all form controls */
+.search-form-control {
+  height: 2.75rem;
 }
 
 /* Basic animations */
