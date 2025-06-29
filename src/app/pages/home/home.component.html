@@ -49,12 +49,12 @@
 </section>
 
 <!-- Search Bar Section -->
-<section class="bg-white shadow-xl relative -mt-16 mx-4 sm:mx-8 lg:mx-16 rounded-2xl z-10">
-  <p-panel [toggleable]="false" styleClass="border-0 shadow-none">
+<section class="bg-theme-primary shadow-xl relative -mt-16 mx-4 sm:mx-8 lg:mx-16 rounded-2xl z-10 border border-theme">
+  <p-panel [toggleable]="false" styleClass="border-0 shadow-none bg-transparent">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
       <!-- Destination -->
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">Where to?</label>
+        <label class="block text-sm font-medium text-theme-primary">Where to?</label>
         <div class="search-field search-field-with-icon">
           <i class="pi pi-map-marker search-icon"></i>
           <input 
@@ -68,7 +68,7 @@
       
       <!-- Check-in -->
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">Check-in</label>
+        <label class="block text-sm font-medium text-theme-primary">Check-in</label>
         <div class="search-field search-field-with-icon">
           <i class="pi pi-calendar search-icon"></i>
           <p-calendar 
@@ -86,7 +86,7 @@
       
       <!-- Check-out -->
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">Check-out</label>
+        <label class="block text-sm font-medium text-theme-primary">Check-out</label>
         <div class="search-field search-field-with-icon">
           <i class="pi pi-calendar search-icon"></i>
           <p-calendar 
@@ -104,7 +104,7 @@
       
       <!-- Guests -->
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">Guests</label>
+        <label class="block text-sm font-medium text-theme-primary">Guests</label>
         <div class="search-field">
           <p-dropdown 
             [options]="guestOptions()"
@@ -114,13 +114,13 @@
             [(ngModel)]="searchForm.guests">
             <ng-template pTemplate="selectedItem" let-selectedOption>
               <div class="flex items-center">
-                <i class="pi pi-users mr-2 text-gray-500"></i>
+                <i class="pi pi-users mr-2 text-theme-tertiary"></i>
                 <span>{{ selectedOption?.label || 'Select guests' }}</span>
               </div>
             </ng-template>
             <ng-template pTemplate="item" let-option>
               <div class="flex items-center">
-                <i class="pi pi-users mr-2 text-gray-500"></i>
+                <i class="pi pi-users mr-2 text-theme-tertiary"></i>
                 <span>{{ option.label }}</span>
               </div>
             </ng-template>
@@ -140,13 +140,13 @@
 </section>
 
 <!-- Stats Section -->
-<section class="bg-gray-50 section-padding">
+<section class="bg-theme-secondary section-padding">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       @for (stat of stats(); track stat.label) {
         <div class="text-center animate-slide-up">
           <div class="text-4xl md:text-5xl font-bold text-primary-600 mb-2">{{ stat.number }}</div>
-          <div class="text-gray-600 font-medium">{{ stat.label }}</div>
+          <div class="text-theme-secondary font-medium">{{ stat.label }}</div>
         </div>
       }
     </div>
@@ -154,13 +154,13 @@
 </section>
 
 <!-- Featured Bookings Section -->
-<section class="section-padding bg-white">
+<section class="section-padding bg-theme-primary">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <h2 class="text-4xl md:text-5xl font-bold text-theme-primary mb-4">
         Featured Destinations
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-theme-secondary max-w-3xl mx-auto">
         Handpicked by our travel experts for unforgettable experiences
       </p>
     </div>
@@ -168,7 +168,7 @@
     @if (isLoading()) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @for (item of [1,2,3]; track item) {
-          <p-card>
+          <p-card styleClass="theme-card">
             <ng-template pTemplate="content">
               <div class="space-y-4">
                 <p-skeleton height="12rem" styleClass="mb-4"></p-skeleton>
@@ -192,7 +192,7 @@
     } @else {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @for (booking of featuredBookings(); track booking.id) {
-          <p-card styleClass="overflow-hidden group h-full">
+          <p-card styleClass="overflow-hidden group h-full theme-card">
             <ng-template pTemplate="header">
               <div class="relative overflow-hidden">
                 <img 
@@ -220,24 +220,24 @@
                       [readonly]="true"
                       styleClass="text-sm">
                     </p-rating>
-                    <span class="text-sm text-gray-600 ml-1">{{ booking.rating }} ({{ booking.reviewCount }})</span>
+                    <span class="text-sm text-theme-secondary ml-1">{{ booking.rating }} ({{ booking.reviewCount }})</span>
                   </div>
                 </div>
                 
-                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ booking.title }}</h3>
-                <p class="text-gray-600 mb-4 line-clamp-2">{{ booking.description }}</p>
+                <h3 class="text-xl font-bold text-theme-primary mb-3">{{ booking.title }}</h3>
+                <p class="text-theme-secondary mb-4 line-clamp-2">{{ booking.description }}</p>
                 
                 <div class="flex flex-wrap gap-2 mb-4">
                   @for (amenity of booking.amenities.slice(0, 3); track amenity) {
                     <p-chip 
                       [label]="amenity"
-                      styleClass="text-xs bg-gray-100 text-gray-700">
+                      styleClass="text-xs bg-theme-tertiary text-theme-secondary">
                     </p-chip>
                   }
                   @if (booking.amenities.length > 3) {
                     <p-chip 
                       [label]="'+' + (booking.amenities.length - 3) + ' more'"
-                      styleClass="text-xs bg-gray-100 text-gray-700">
+                      styleClass="text-xs bg-theme-tertiary text-theme-secondary">
                     </p-chip>
                   }
                 </div>
@@ -268,26 +268,26 @@
 </section>
 
 <!-- Features Section -->
-<section class="section-padding bg-gradient-to-br from-primary-50 to-accent-50">
+<section class="section-padding bg-gradient-to-br from-primary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <h2 class="text-4xl md:text-5xl font-bold text-theme-primary mb-4">
         Why Choose BookEase?
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-theme-secondary max-w-3xl mx-auto">
         We make booking simple, secure, and memorable
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       @for (feature of features(); track feature.title) {
-        <p-card styleClass="text-center group h-full">
+        <p-card styleClass="text-center group h-full theme-card">
           <ng-template pTemplate="content">
-            <div class="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center text-4xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+            <div class="w-20 h-20 mx-auto mb-6 bg-theme-primary rounded-full flex items-center justify-center text-4xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
               {{ feature.icon }}
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">{{ feature.title }}</h3>
-            <p class="text-gray-600 leading-relaxed">{{ feature.description }}</p>
+            <h3 class="text-xl font-bold text-theme-primary mb-3">{{ feature.title }}</h3>
+            <p class="text-theme-secondary leading-relaxed">{{ feature.description }}</p>
           </ng-template>
         </p-card>
       }

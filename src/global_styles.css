@@ -10,19 +10,76 @@
   box-sizing: border-box;
 }
 
+/* Root color variables for light theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme color variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --border-color: #374151;
+    --border-light: #4b5563;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Force dark theme when .dark-theme class is present */
+.dark-theme {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --border-color: #374151;
+  --border-light: #4b5563;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-light: rgba(0, 0, 0, 0.2);
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
-  color: #1f2937;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Button styles */
+/* Button styles with theme support */
 .btn-primary {
   @apply bg-primary-600 hover:bg-primary-700 text-white font-medium px-6 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
 }
 
-/* Minimal utility classes only */
+/* Dark theme button adjustments */
+@media (prefers-color-scheme: dark) {
+  .btn-primary {
+    @apply focus:ring-offset-gray-800;
+  }
+}
+
+.dark-theme .btn-primary {
+  @apply focus:ring-offset-gray-800;
+}
+
+/* Minimal utility classes with theme support */
 .section-padding {
   @apply px-4 sm:px-6 lg:px-8 py-16 lg:py-24;
 }
@@ -34,7 +91,19 @@ body {
   overflow: hidden;
 }
 
-/* Search form styling - simplified approach */
+/* Card styling with theme support */
+.theme-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px var(--shadow-light);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-card:hover {
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* Search form styling with theme support */
 .search-field {
   width: 100%;
 }
@@ -44,11 +113,13 @@ body {
 .search-field .p-dropdown {
   width: 100%;
   height: 3rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
   transition: all 0.2s ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .search-field .p-inputtext:focus,
@@ -65,16 +136,18 @@ body {
 
 .search-field .p-dropdown {
   width: 100%;
+  background-color: var(--bg-primary);
 }
 
 .search-field .p-dropdown .p-dropdown-label {
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
+  color: var(--text-primary);
 }
 
 .search-field .p-dropdown .p-dropdown-trigger {
   width: 3rem;
-  border-left: 1px solid #d1d5db;
+  border-left: 1px solid var(--border-color);
 }
 
 /* Icon styling for search fields */
@@ -83,7 +156,7 @@ body {
   left: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7280;
+  color: var(--text-tertiary);
   z-index: 10;
   pointer-events: none;
 }
@@ -100,6 +173,121 @@ body {
 /* Calendar specific fixes */
 .search-field .p-calendar .p-datepicker-trigger {
   display: none;
+}
+
+/* PrimeNG component theme overrides */
+.p-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px var(--shadow-light);
+}
+
+.p-card .p-card-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.p-card .p-card-content {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.p-card .p-card-footer {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Dialog theme support */
+.p-dialog {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.p-dialog .p-dialog-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.p-dialog .p-dialog-content {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Menu theme support */
+.p-menu {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.p-menu .p-menuitem-link {
+  color: var(--text-primary);
+}
+
+.p-menu .p-menuitem-link:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Dropdown theme support */
+.p-dropdown-panel {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.p-dropdown-item {
+  color: var(--text-primary);
+}
+
+.p-dropdown-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Calendar theme support */
+.p-datepicker {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.p-datepicker .p-datepicker-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.p-datepicker table td {
+  color: var(--text-primary);
+}
+
+.p-datepicker table td:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Slider theme support */
+.p-slider {
+  background-color: var(--border-color);
+}
+
+.p-slider .p-slider-handle {
+  background-color: #2563eb;
+  border: 2px solid #2563eb;
+}
+
+/* Message theme support */
+.p-message {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Checkbox theme support */
+.p-checkbox .p-checkbox-box {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
 }
 
 /* Basic animations */
@@ -144,4 +332,37 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+/* Utility classes for theme-aware styling */
+.bg-theme-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-theme-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-theme-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.text-theme-primary {
+  color: var(--text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+}
+
+.text-theme-tertiary {
+  color: var(--text-tertiary);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+.border-theme-light {
+  border-color: var(--border-light);
 }

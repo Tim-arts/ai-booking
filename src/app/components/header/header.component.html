@@ -1,4 +1,4 @@
-<header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+<header class="bg-theme-primary shadow-lg fixed top-0 left-0 right-0 z-50 border-b border-theme">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
@@ -7,7 +7,7 @@
           <div class="w-8 h-8 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
             <span class="text-white font-bold text-sm">B</span>
           </div>
-          <span class="text-xl font-bold text-gray-900">BookEase</span>
+          <span class="text-xl font-bold text-theme-primary">BookEase</span>
         </a>
       </div>
 
@@ -29,7 +29,7 @@
       <div class="md:hidden">
         <button
           (click)="toggleMenu()"
-          class="text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 p-2 rounded-md">
+          class="text-theme-tertiary hover:text-theme-secondary hover:bg-theme-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 p-2 rounded-md transition-colors duration-200">
           <span class="sr-only">Open main menu</span>
           @if (!isMenuOpen()) {
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +47,7 @@
     <!-- Mobile Navigation Menu -->
     @if (isMenuOpen()) {
       <div class="md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-theme-primary border-t border-theme">
           <!-- Mobile Auth Section -->
           <div class="pt-2">
             @if (isLoggedIn()) {
@@ -57,17 +57,17 @@
                     {{ userInitials() }}
                   </div>
                   <div>
-                    <p class="text-sm font-medium text-gray-900">{{ userFullName() }}</p>
-                    <p class="text-xs text-gray-500">{{ userEmail() }}</p>
+                    <p class="text-sm font-medium text-theme-primary">{{ userFullName() }}</p>
+                    <p class="text-xs text-theme-secondary">{{ userEmail() }}</p>
                   </div>
                 </div>
                 <div class="space-y-1">
-                  <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md">My Profile</a>
-                  <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md">My Bookings</a>
-                  <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md">Settings</a>
+                  <a href="#" class="block px-3 py-2 text-sm text-theme-secondary hover:bg-theme-secondary hover:text-theme-primary rounded-md transition-colors duration-200">My Profile</a>
+                  <a href="#" class="block px-3 py-2 text-sm text-theme-secondary hover:bg-theme-secondary hover:text-theme-primary rounded-md transition-colors duration-200">My Bookings</a>
+                  <a href="#" class="block px-3 py-2 text-sm text-theme-secondary hover:bg-theme-secondary hover:text-theme-primary rounded-md transition-colors duration-200">Settings</a>
                   <button 
                     (click)="onLogout()"
-                    class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md">
+                    class="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors duration-200">
                     Sign Out
                   </button>
                 </div>

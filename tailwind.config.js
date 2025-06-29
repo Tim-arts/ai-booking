@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  darkMode: 'media', // Enable automatic dark mode based on system preference
   theme: {
     extend: {
       colors: {
@@ -18,6 +19,19 @@ module.exports = {
         accent: {
           500: '#f97316',
           600: '#ea580c',
+        },
+        // Dark mode specific colors
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
         }
       },
       ringColor: {

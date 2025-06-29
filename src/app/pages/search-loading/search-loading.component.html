@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gradient-to-br from-primary-50 to-accent-50 pt-20">
+<div class="min-h-screen bg-theme-secondary pt-20">
   <div class="max-w-4xl mx-auto section-padding">
     <!-- Search Summary Card -->
     @if (searchParams(); as params) {
-      <p-card styleClass="mb-8 shadow-lg">
+      <p-card styleClass="mb-8 shadow-lg theme-card">
         <ng-template pTemplate="header">
           <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6">
             <h1 class="text-2xl font-bold mb-2">Searching Your Perfect Flight</h1>
@@ -15,38 +15,38 @@
             <div class="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mx-auto mb-3">
               <i class="pi pi-map-marker text-primary-600 text-xl"></i>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-1">Destination</h3>
-            <p class="text-gray-600 capitalize">{{ params.destination }}</p>
+            <h3 class="font-semibold text-theme-primary mb-1">Destination</h3>
+            <p class="text-theme-secondary capitalize">{{ params.destination }}</p>
           </div>
           
           <div class="text-center">
             <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-3">
               <i class="pi pi-calendar text-green-600 text-xl"></i>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-1">Check-in</h3>
-            <p class="text-gray-600">{{ formatDate(params.checkIn) }}</p>
+            <h3 class="font-semibold text-theme-primary mb-1">Check-in</h3>
+            <p class="text-theme-secondary">{{ formatDate(params.checkIn) }}</p>
           </div>
           
           <div class="text-center">
             <div class="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mx-auto mb-3">
               <i class="pi pi-calendar text-orange-600 text-xl"></i>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-1">Check-out</h3>
-            <p class="text-gray-600">{{ formatDate(params.checkOut) }}</p>
+            <h3 class="font-semibold text-theme-primary mb-1">Check-out</h3>
+            <p class="text-theme-secondary">{{ formatDate(params.checkOut) }}</p>
           </div>
           
           <div class="text-center">
             <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mx-auto mb-3">
               <i class="pi pi-users text-purple-600 text-xl"></i>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-1">Travelers</h3>
-            <p class="text-gray-600">{{ params.guests }} {{ params.guests === 1 ? 'Guest' : 'Guests' }}</p>
+            <h3 class="font-semibold text-theme-primary mb-1">Travelers</h3>
+            <p class="text-theme-secondary">{{ params.guests }} {{ params.guests === 1 ? 'Guest' : 'Guests' }}</p>
           </div>
         </div>
         
         <div class="px-6 pb-6">
-          <div class="bg-gray-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-600">
+          <div class="bg-theme-secondary rounded-lg p-4 text-center">
+            <p class="text-sm text-theme-secondary">
               <i class="pi pi-info-circle mr-2"></i>
               {{ getDaysDifference() }} night{{ getDaysDifference() !== 1 ? 's' : '' }} trip
             </p>
@@ -56,7 +56,7 @@
     }
 
     <!-- Loading Section -->
-    <p-card styleClass="text-center shadow-lg">
+    <p-card styleClass="text-center shadow-lg theme-card">
       <ng-template pTemplate="content">
         <div class="py-12">
           <!-- Animated Loading Spinner -->
@@ -70,8 +70,8 @@
           </div>
           
           <!-- Loading Message -->
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ currentMessage() }}</h2>
-          <p class="text-gray-600 mb-8 max-w-md mx-auto">
+          <h2 class="text-2xl font-bold text-theme-primary mb-4">{{ currentMessage() }}</h2>
+          <p class="text-theme-secondary mb-8 max-w-md mx-auto">
             Please wait while we search through hundreds of airlines to find you the best deals and flight options.
           </p>
           
@@ -81,32 +81,32 @@
               <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2">
                 <i class="pi pi-check text-sm"></i>
               </div>
-              <p class="text-sm font-medium text-gray-900">Search Initiated</p>
+              <p class="text-sm font-medium text-theme-primary">Search Initiated</p>
             </div>
             <div class="flex flex-col items-center">
               <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2 animate-pulse">
                 <i class="pi pi-search text-sm"></i>
               </div>
-              <p class="text-sm font-medium text-gray-900">Finding Flights</p>
+              <p class="text-sm font-medium text-theme-primary">Finding Flights</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 mb-2">
+              <div class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2">
                 <i class="pi pi-dollar text-sm"></i>
               </div>
-              <p class="text-sm text-gray-500">Comparing Prices</p>
+              <p class="text-sm text-theme-secondary">Comparing Prices</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 mb-2">
+              <div class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2">
                 <i class="pi pi-star text-sm"></i>
               </div>
-              <p class="text-sm text-gray-500">Best Results</p>
+              <p class="text-sm text-theme-secondary">Best Results</p>
             </div>
           </div>
           
           <!-- Fun Facts -->
-          <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-lg p-6 mb-6">
-            <h3 class="font-semibold text-gray-900 mb-3">✈️ Did you know?</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="bg-gradient-to-r from-primary-50 to-accent-50 dark:from-gray-700 dark:to-gray-800 rounded-lg p-6 mb-6">
+            <h3 class="font-semibold text-theme-primary mb-3">✈️ Did you know?</h3>
+            <p class="text-theme-secondary text-sm">
               We search through over 500 airlines and travel partners to ensure you get the best possible price and flight options for your journey.
             </p>
           </div>

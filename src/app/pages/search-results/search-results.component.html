@@ -1,12 +1,12 @@
-<div class="min-h-screen bg-gray-50 pt-20">
+<div class="min-h-screen bg-theme-secondary pt-20">
   <div class="max-w-7xl mx-auto section-padding">
     <!-- Search Summary -->
     @if (searchParams(); as params) {
       <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Flight Results</h1>
-            <p class="text-gray-600">
+            <h1 class="text-3xl font-bold text-theme-primary mb-2">Flight Results</h1>
+            <p class="text-theme-secondary">
               {{ filteredAndSortedResults().length }} flights found for 
               <span class="font-medium capitalize">{{ params.destination }}</span>
             </p>
@@ -20,34 +20,34 @@
         </div>
         
         <!-- Trip Summary -->
-        <p-card styleClass="mb-6">
+        <p-card styleClass="mb-6 theme-card">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="flex items-center space-x-3">
               <i class="pi pi-map-marker text-primary-600"></i>
               <div>
-                <p class="text-sm text-gray-500">Destination</p>
-                <p class="font-medium capitalize">{{ params.destination }}</p>
+                <p class="text-sm text-theme-secondary">Destination</p>
+                <p class="font-medium text-theme-primary capitalize">{{ params.destination }}</p>
               </div>
             </div>
             <div class="flex items-center space-x-3">
               <i class="pi pi-calendar text-green-600"></i>
               <div>
-                <p class="text-sm text-gray-500">Departure</p>
-                <p class="font-medium">{{ formatDate(params.checkIn) }}</p>
+                <p class="text-sm text-theme-secondary">Departure</p>
+                <p class="font-medium text-theme-primary">{{ formatDate(params.checkIn) }}</p>
               </div>
             </div>
             <div class="flex items-center space-x-3">
               <i class="pi pi-calendar text-orange-600"></i>
               <div>
-                <p class="text-sm text-gray-500">Return</p>
-                <p class="font-medium">{{ formatDate(params.checkOut) }}</p>
+                <p class="text-sm text-theme-secondary">Return</p>
+                <p class="font-medium text-theme-primary">{{ formatDate(params.checkOut) }}</p>
               </div>
             </div>
             <div class="flex items-center space-x-3">
               <i class="pi pi-users text-purple-600"></i>
               <div>
-                <p class="text-sm text-gray-500">Travelers</p>
-                <p class="font-medium">{{ params.guests }} {{ params.guests === 1 ? 'Guest' : 'Guests' }}</p>
+                <p class="text-sm text-theme-secondary">Travelers</p>
+                <p class="font-medium text-theme-primary">{{ params.guests }} {{ params.guests === 1 ? 'Guest' : 'Guests' }}</p>
               </div>
             </div>
           </div>
@@ -58,11 +58,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
       <!-- Filters Sidebar -->
       <div class="lg:col-span-1">
-        <p-card>
+        <p-card styleClass="theme-card">
           <ng-template pTemplate="header">
-            <div class="p-4 border-b">
+            <div class="p-4 border-b border-theme">
               <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900">Filters</h3>
+                <h3 class="text-lg font-semibold text-theme-primary">Filters</h3>
                 <p-button 
                   label="Clear" 
                   [text]="true"
@@ -76,7 +76,7 @@
           <div class="space-y-6">
             <!-- Price Range -->
             <div>
-              <h4 class="font-medium text-gray-900 mb-3">Price Range</h4>
+              <h4 class="font-medium text-theme-primary mb-3">Price Range</h4>
               <div class="px-2">
                 <p-slider 
                   [(ngModel)]="filters().maxPrice"
@@ -86,7 +86,7 @@
                   (onSlideEnd)="onPriceFilterChange($event)"
                   styleClass="w-full">
                 </p-slider>
-                <div class="flex justify-between text-sm text-gray-500 mt-2">
+                <div class="flex justify-between text-sm text-theme-secondary mt-2">
                   <span>${{ priceRange().min }}</span>
                   <span>${{ filters().maxPrice }}</span>
                   <span>${{ priceRange().max }}</span>
@@ -98,7 +98,7 @@
 
             <!-- Airlines -->
             <div>
-              <h4 class="font-medium text-gray-900 mb-3">Airlines</h4>
+              <h4 class="font-medium text-theme-primary mb-3">Airlines</h4>
               <div class="space-y-2">
                 @for (airline of availableAirlines(); track airline) {
                   <div class="flex items-center">
@@ -108,7 +108,7 @@
                       (onChange)="onAirlineFilterChange(airline, $event.checked)"
                       styleClass="mr-2">
                     </p-checkbox>
-                    <label class="text-sm text-gray-700">{{ airline }}</label>
+                    <label class="text-sm text-theme-secondary">{{ airline }}</label>
                   </div>
                 }
               </div>
@@ -118,7 +118,7 @@
 
             <!-- Stops -->
             <div>
-              <h4 class="font-medium text-gray-900 mb-3">Stops</h4>
+              <h4 class="font-medium text-theme-primary mb-3">Stops</h4>
               <div class="space-y-2">
                 @for (stops of [0, 1, 2]; track stops) {
                   <div class="flex items-center">
@@ -128,7 +128,7 @@
                       (onChange)="onStopsFilterChange(stops, $event.checked)"
                       styleClass="mr-2">
                     </p-checkbox>
-                    <label class="text-sm text-gray-700">{{ getStopsText(stops) }}</label>
+                    <label class="text-sm text-theme-secondary">{{ getStopsText(stops) }}</label>
                   </div>
                 }
               </div>
@@ -141,11 +141,11 @@
       <div class="lg:col-span-3">
         <!-- Sort Options -->
         <div class="flex items-center justify-between mb-6">
-          <p class="text-gray-600">
+          <p class="text-theme-secondary">
             Showing {{ filteredAndSortedResults().length }} of {{ allResults().length }} flights
           </p>
           <div class="flex items-center space-x-2">
-            <label class="text-sm text-gray-700">Sort by:</label>
+            <label class="text-sm text-theme-secondary">Sort by:</label>
             <p-dropdown 
               [options]="sortOptions"
               [(ngModel)]="sortBy"
@@ -160,7 +160,7 @@
         <!-- Flight Results -->
         <div class="space-y-4">
           @for (flight of filteredAndSortedResults(); track flight.id) {
-            <p-card styleClass="hover:shadow-lg transition-shadow duration-200">
+            <p-card styleClass="hover:shadow-lg transition-shadow duration-200 theme-card">
               <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                 <!-- Airline Info -->
                 <div class="md:col-span-3">
@@ -169,8 +169,8 @@
                       <span class="text-primary-600 font-bold text-sm">{{ flight.airlineCode }}</span>
                     </div>
                     <div>
-                      <p class="font-medium text-gray-900">{{ flight.airline }}</p>
-                      <p class="text-sm text-gray-500">{{ flight.aircraft }}</p>
+                      <p class="font-medium text-theme-primary">{{ flight.airline }}</p>
+                      <p class="text-sm text-theme-secondary">{{ flight.aircraft }}</p>
                     </div>
                   </div>
                 </div>
@@ -179,20 +179,20 @@
                 <div class="md:col-span-4">
                   <div class="flex items-center space-x-4">
                     <div class="text-center">
-                      <p class="text-xl font-bold text-gray-900">{{ flight.departureTime }}</p>
-                      <p class="text-sm text-gray-500">{{ flight.departureAirport }}</p>
+                      <p class="text-xl font-bold text-theme-primary">{{ flight.departureTime }}</p>
+                      <p class="text-sm text-theme-secondary">{{ flight.departureAirport }}</p>
                     </div>
                     <div class="flex-1 text-center">
                       <div class="flex items-center justify-center space-x-2">
-                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                        <div class="flex-1 h-px bg-gray-300"></div>
+                        <div class="w-2 h-2 bg-theme-tertiary rounded-full"></div>
+                        <div class="flex-1 h-px bg-theme-tertiary"></div>
                         @if (flight.stops > 0) {
                           <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
-                          <div class="flex-1 h-px bg-gray-300"></div>
+                          <div class="flex-1 h-px bg-theme-tertiary"></div>
                         }
-                        <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                        <div class="w-2 h-2 bg-theme-tertiary rounded-full"></div>
                       </div>
-                      <p class="text-sm text-gray-500 mt-1">{{ flight.duration }}</p>
+                      <p class="text-sm text-theme-secondary mt-1">{{ flight.duration }}</p>
                       @if (flight.stops > 0) {
                         <p class="text-xs text-orange-600">{{ getStopsText(flight.stops) }}</p>
                       } @else {
@@ -200,8 +200,8 @@
                       }
                     </div>
                     <div class="text-center">
-                      <p class="text-xl font-bold text-gray-900">{{ flight.arrivalTime }}</p>
-                      <p class="text-sm text-gray-500">{{ flight.arrivalAirport }}</p>
+                      <p class="text-xl font-bold text-theme-primary">{{ flight.arrivalTime }}</p>
+                      <p class="text-sm text-theme-secondary">{{ flight.arrivalAirport }}</p>
                     </div>
                   </div>
                 </div>
@@ -215,10 +215,10 @@
                         [readonly]="true"
                         styleClass="text-sm">
                       </p-rating>
-                      <span class="text-sm text-gray-600">{{ flight.rating }}</span>
+                      <span class="text-sm text-theme-secondary">{{ flight.rating }}</span>
                     </div>
-                    <p class="text-sm text-gray-600">{{ flight.baggage }}</p>
-                    <p class="text-xs text-gray-500">{{ flight.availableSeats }} seats left</p>
+                    <p class="text-sm text-theme-secondary">{{ flight.baggage }}</p>
+                    <p class="text-xs text-theme-tertiary">{{ flight.availableSeats }} seats left</p>
                   </div>
                 </div>
 
@@ -227,7 +227,7 @@
                   <div class="space-y-3">
                     <div>
                       <p class="text-2xl font-bold text-primary-600">${{ flight.price }}</p>
-                      <p class="text-sm text-gray-500">per person</p>
+                      <p class="text-sm text-theme-secondary">per person</p>
                     </div>
                     <p-button 
                       label="Book Now" 
@@ -240,11 +240,11 @@
               </div>
             </p-card>
           } @empty {
-            <p-card>
+            <p-card styleClass="theme-card">
               <div class="text-center py-12">
-                <i class="pi pi-search text-4xl text-gray-400 mb-4"></i>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">No flights found</h3>
-                <p class="text-gray-600 mb-4">Try adjusting your filters to see more results.</p>
+                <i class="pi pi-search text-4xl text-theme-tertiary mb-4"></i>
+                <h3 class="text-xl font-semibold text-theme-primary mb-2">No flights found</h3>
+                <p class="text-theme-secondary mb-4">Try adjusting your filters to see more results.</p>
                 <p-button 
                   label="Clear Filters" 
                   icon="pi pi-filter-slash"
