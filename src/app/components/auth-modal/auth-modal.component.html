@@ -5,7 +5,7 @@
   [draggable]="false"
   [resizable]="false"
   [style]="{width: '90vw', maxWidth: '500px'}"
-  (onHide)="onVisibilityChange(false)">
+  (visibleChange)="onVisibilityChange($event)">
   
   <ng-template pTemplate="header">
     <div class="flex items-center space-x-2">
