@@ -1,4 +1,4 @@
-import { Component, signal, output, input, effect, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, output, input, effect, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -8,7 +8,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { AuthService } from '../../services/auth.service';
-import { inject } from '@angular/core';
 
 // Custom validator for password confirmation
 function passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -66,11 +65,9 @@ export class AuthModalComponent {
   constructor() {
     // Reset forms when switching modes
     effect(() => {
-      if (this.isLoginMode()) {
-        this.authError.set(null);
-        this.loginForm.reset();
-        this.registerForm.reset();
-      }
+      this.authError.set(null);
+      this.loginForm.reset();
+      this.registerForm.reset();
     });
   }
 
@@ -92,6 +89,7 @@ export class AuthModalComponent {
       this.authService.login({ email: email!, password: password! }).subscribe({
         next: (user) => {
           this.authSuccess.emit({ user, isLogin: true });
+          this.closeModal();
           this.isLoading.set(false);
         },
         error: (error) => {
@@ -117,6 +115,7 @@ export class AuthModalComponent {
       }).subscribe({
         next: (user) => {
           this.authSuccess.emit({ user, isLogin: false });
+          this.closeModal();
           this.isLoading.set(false);
         },
         error: (error) => {
