@@ -1,11 +1,23 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule]
+  imports: [
+    ReactiveFormsModule,
+    CardModule,
+    ButtonModule,
+    InputTextModule,
+    InputTextareaModule,
+    MessageModule
+  ]
 })
 export class ContactComponent {
   readonly isSubmitting = signal(false);

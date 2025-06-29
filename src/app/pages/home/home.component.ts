@@ -3,11 +3,33 @@ import { RouterLink } from '@angular/router';
 import { BookingService } from '../../services/booking.service';
 import { type Booking } from '../../types/booking.types';
 
+// PrimeNG Imports
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SkeletonModule } from 'primeng/skeleton';
+import { MessageModule } from 'primeng/message';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink]
+  imports: [
+    RouterLink,
+    CardModule,
+    ButtonModule,
+    InputTextModule,
+    CalendarModule,
+    DropdownModule,
+    SkeletonModule,
+    MessageModule,
+    TagModule,
+    RatingModule
+  ]
 })
 export class HomeComponent implements OnInit {
   private readonly bookingService = inject(BookingService);
@@ -15,6 +37,13 @@ export class HomeComponent implements OnInit {
   readonly featuredBookings = signal<Booking[]>([]);
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
+
+  readonly guestOptions = computed(() => [
+    { label: '1 Guest', value: 1 },
+    { label: '2 Guests', value: 2 },
+    { label: '3 Guests', value: 3 },
+    { label: '4+ Guests', value: 4 }
+  ]);
 
   readonly stats = computed(() => [
     { number: '50K+', label: 'Happy Travelers' },

@@ -5,26 +5,41 @@
       <p class="text-xl text-gray-600">Find your perfect getaway</p>
     </div>
     
-    <div class="card p-8 max-w-2xl mx-auto">
+    <p-card styleClass="max-w-2xl mx-auto">
+      <ng-template pTemplate="header">
+        <div class="p-6 pb-0">
+          <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+            <i class="pi pi-search mr-2 text-primary-600"></i>
+            Search for Destinations
+          </h2>
+        </div>
+      </ng-template>
+      
       <div class="space-y-4">
         <input 
+          pInputText
           type="text" 
           placeholder="Search for destinations..."
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          class="w-full"
           [value]="searchQuery()"
           (input)="searchQuery.set($any($event.target).value)"
         />
-        <button class="btn-primary w-full py-3">
-          Search
-        </button>
+        <p-button 
+          label="Search" 
+          icon="pi pi-search"
+          styleClass="w-full justify-center py-3">
+        </p-button>
       </div>
-    </div>
+    </p-card>
 
     <div class="mt-12 text-center">
-      <div class="bg-primary-50 rounded-lg p-8">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h3>
-        <p class="text-gray-600">We're building an amazing search experience for you. Stay tuned!</p>
-      </div>
+      <p-card styleClass="bg-primary-50">
+        <div class="text-center p-8">
+          <i class="pi pi-clock text-4xl text-primary-600 mb-4"></i>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h3>
+          <p class="text-gray-600">We're building an amazing search experience for you. Stay tuned!</p>
+        </div>
+      </p-card>
     </div>
   </div>
 </div>

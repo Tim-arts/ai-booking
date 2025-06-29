@@ -5,8 +5,16 @@
       <p class="text-xl text-gray-600">Your trusted travel companion since day one</p>
     </div>
     
-    <div class="card p-8 mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
+    <p-card styleClass="mb-8">
+      <ng-template pTemplate="header">
+        <div class="p-6 pb-0">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center">
+            <i class="pi pi-heart mr-3 text-primary-600"></i>
+            Our Story
+          </h2>
+        </div>
+      </ng-template>
+      
       <p class="text-gray-600 leading-relaxed mb-6">
         BookEase was born from a simple idea: travel booking should be easy, transparent, and delightful. 
         Founded by a team of passionate travelers and technology experts, we set out to create a platform 
@@ -17,23 +25,40 @@
         and create unforgettable memories. Our commitment to excellence and customer satisfaction drives 
         everything we do.
       </p>
-    </div>
+    </p-card>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="card p-6">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="p-6 pb-0">
+            <h3 class="text-2xl font-bold text-gray-900 flex items-center">
+              <i class="pi pi-flag mr-2 text-primary-600"></i>
+              Our Mission
+            </h3>
+          </div>
+        </ng-template>
+        
         <p class="text-gray-600 leading-relaxed">
           To make travel accessible, enjoyable, and worry-free for everyone. We believe that great 
           experiences shouldn't come with complicated booking processes.
         </p>
-      </div>
-      <div class="card p-6">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
+      </p-card>
+      
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="p-6 pb-0">
+            <h3 class="text-2xl font-bold text-gray-900 flex items-center">
+              <i class="pi pi-eye mr-2 text-primary-600"></i>
+              Our Vision
+            </h3>
+          </div>
+        </ng-template>
+        
         <p class="text-gray-600 leading-relaxed">
           To become the world's most trusted travel platform, connecting travelers with extraordinary 
           experiences while supporting local communities worldwide.
         </p>
-      </div>
+      </p-card>
     </div>
   </div>
 </div>

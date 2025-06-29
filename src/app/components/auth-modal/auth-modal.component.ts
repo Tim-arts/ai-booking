@@ -1,5 +1,12 @@
 import { Component, signal, output, input, effect, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { MessageModule } from 'primeng/message';
+import { DividerModule } from 'primeng/divider';
 
 // Custom validator for password confirmation
 function passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -17,22 +24,30 @@ function passwordMatchValidator(control: AbstractControl): { [key: string]: bool
   selector: 'app-auth-modal',
   templateUrl: './auth-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule]
+  imports: [
+    ReactiveFormsModule,
+    DialogModule,
+    ButtonModule,
+    InputTextModule,
+    PasswordModule,
+    CheckboxModule,
+    MessageModule,
+    DividerModule
+  ]
 })
 export class AuthModalComponent {
   readonly isOpen = input<boolean>(false);
   readonly close = output<void>();
   readonly authSuccess = output<{ user: any; isLogin: boolean }>();
 
-  readonly isVisible = signal(false);
   readonly isLoginMode = signal(true);
   readonly isLoading = signal(false);
-  readonly showPassword = signal(false);
   readonly authError = signal<string | null>(null);
 
   readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required]),
+    rememberMe: new FormControl(false)
   });
 
   readonly registerForm = new FormGroup({
@@ -45,21 +60,11 @@ export class AuthModalComponent {
   }, { validators: passwordMatchValidator });
 
   constructor() {
-    // Handle modal visibility animation
-    effect(() => {
-      if (this.isOpen()) {
-        setTimeout(() => this.isVisible.set(true), 10);
-      } else {
-        this.isVisible.set(false);
-      }
-    });
-
     // Reset forms when switching modes
     effect(() => {
       this.authError.set(null);
       this.loginForm.reset();
       this.registerForm.reset();
-      this.showPassword.set(false);
     });
   }
 
@@ -67,19 +72,8 @@ export class AuthModalComponent {
     this.isLoginMode.update(mode => !mode);
   }
 
-  togglePasswordVisibility(): void {
-    this.showPassword.update(show => !show);
-  }
-
-  onBackdropClick(event: MouseEvent): void {
-    if (event.target === event.currentTarget) {
-      this.closeModal();
-    }
-  }
-
   closeModal(): void {
-    this.isVisible.set(false);
-    setTimeout(() => this.close.emit(), 300);
+    this.close.emit();
   }
 
   onLogin(): void {
