@@ -1,5 +1,4 @@
 import { Component, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
@@ -8,7 +7,7 @@ import { UserMenuComponent } from '../user-menu/user-menu.component';
   selector: 'app-header',
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, RouterLinkActive, AuthModalComponent, UserMenuComponent]
+  imports: [AuthModalComponent, UserMenuComponent]
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);
