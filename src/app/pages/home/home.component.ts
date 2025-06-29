@@ -1,5 +1,6 @@
 import { Component, inject, signal, computed, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 import { type Booking } from '../../types/booking.types';
 
@@ -20,6 +21,7 @@ import { RatingModule } from 'primeng/rating';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
+    FormsModule,
     CardModule,
     ButtonModule,
     InputTextModule,
