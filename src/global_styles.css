@@ -29,28 +29,6 @@ body {
   overflow: hidden;
 }
 
-/* Custom styles for input icons */
-.p-input-icon-left > i:first-of-type {
-  left: 0.75rem;
-  color: #6b7280;
-}
-
-.p-input-icon-left > .p-inputtext {
-  padding-left: 2.5rem;
-}
-
-.p-input-icon-left > .p-dropdown {
-  padding-left: 0;
-}
-
-.p-input-icon-left > .p-dropdown > .p-dropdown-label {
-  padding-left: 2.5rem;
-}
-
-.p-input-icon-left > .p-calendar > .p-inputtext {
-  padding-left: 2.5rem;
-}
-
 /* Basic animations */
 @keyframes fadeIn {
   from {

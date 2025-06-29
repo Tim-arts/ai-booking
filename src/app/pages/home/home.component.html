@@ -56,53 +56,58 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-6">
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Where to?</label>
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-map-marker"></i>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-map-marker"></i>
+          </p-inputGroupAddon>
           <input 
             pInputText
             type="text" 
             placeholder="Search destinations..."
-            class="w-full"
+            class="flex-1"
           />
-        </span>
+        </p-inputGroup>
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-in</label>
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-calendar"></i>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-calendar"></i>
+          </p-inputGroupAddon>
           <p-calendar 
             inputId="checkin"
             placeholder="Select date"
-            styleClass="w-full"
-            inputStyleClass="pl-10">
+            styleClass="flex-1">
           </p-calendar>
-        </span>
+        </p-inputGroup>
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-out</label>
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-calendar"></i>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-calendar"></i>
+          </p-inputGroupAddon>
           <p-calendar 
             inputId="checkout"
             placeholder="Select date"
-            styleClass="w-full"
-            inputStyleClass="pl-10">
+            styleClass="flex-1">
           </p-calendar>
-        </span>
+        </p-inputGroup>
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Guests</label>
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-users"></i>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-users"></i>
+          </p-inputGroupAddon>
           <p-dropdown 
             [options]="guestOptions()"
             placeholder="Select guests"
             optionLabel="label"
             optionValue="value"
-            styleClass="w-full"
-            panelStyleClass="w-full">
+            styleClass="flex-1">
           </p-dropdown>
-        </span>
+        </p-inputGroup>
       </div>
     </div>
     <div class="px-6 pb-6 text-center">

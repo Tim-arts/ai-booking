@@ -15,6 +15,8 @@ import { MessageModule } from 'primeng/message';
 import { ChipModule } from 'primeng/chip';
 import { RatingModule } from 'primeng/rating';
 import { PanelModule } from 'primeng/panel';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +34,9 @@ import { PanelModule } from 'primeng/panel';
     MessageModule,
     ChipModule,
     RatingModule,
-    PanelModule
+    PanelModule,
+    InputGroupModule,
+    InputGroupAddonModule
   ]
 })
 export class HomeComponent implements OnInit {
