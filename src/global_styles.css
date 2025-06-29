@@ -97,6 +97,7 @@ body {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   border: none;
+  background: white;
 }
 
 .p-card:hover {
@@ -118,25 +119,63 @@ body {
   border-radius: 0 0 0.75rem 0.75rem;
 }
 
+/* Critical Dialog/Modal fixes */
 .p-dialog {
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: white !important;
+  border: 1px solid #e5e7eb;
 }
 
 .p-dialog .p-dialog-header {
   border-radius: 1rem 1rem 0 0;
   padding: 1.5rem;
   border-bottom: 1px solid #e5e7eb;
+  background: white !important;
 }
 
 .p-dialog .p-dialog-content {
   padding: 1.5rem;
+  background: white !important;
+}
+
+.p-dialog .p-dialog-footer {
+  padding: 1.5rem;
+  background: white !important;
+  border-top: 1px solid #e5e7eb;
+  border-radius: 0 0 1rem 1rem;
+}
+
+/* Ensure modal overlay is properly styled */
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Fix close button */
+.p-dialog .p-dialog-header-close {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.p-dialog .p-dialog-header-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.p-dialog .p-dialog-header-close:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 .p-menu {
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border: 1px solid #e5e7eb;
+  background: white;
 }
 
 .p-menu .p-menuitem-link {
