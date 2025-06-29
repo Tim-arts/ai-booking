@@ -71,7 +71,7 @@ export class UserMenuComponent {
     }
   ]);
 
-  toggleMenu(): void {
+  toggleMenu(event: Event): void {
     this.menu.toggle(event);
     this.isMenuOpen.update(open => !open);
   }
