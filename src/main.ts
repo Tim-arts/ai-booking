@@ -2,9 +2,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { RouterOutlet } from '@angular/router';
+import Aura from '@primeng/themes/aura';
 
 import { routes } from './app/app.routes';
 import { HeaderComponent } from './app/components/header/header.component';
@@ -28,10 +29,10 @@ bootstrapApplication(App, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    provideAnimations(),
+    provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: 'lara'
+        preset: Aura
       }
     })
   ]
