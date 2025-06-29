@@ -68,31 +68,41 @@
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-in</label>
-        <p-calendar 
-          [showIcon]="true"
-          inputId="checkin"
-          placeholder="Select date"
-          styleClass="w-full">
-        </p-calendar>
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-calendar"></i>
+          <p-calendar 
+            inputId="checkin"
+            placeholder="Select date"
+            styleClass="w-full"
+            inputStyleClass="pl-10">
+          </p-calendar>
+        </span>
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Check-out</label>
-        <p-calendar 
-          [showIcon]="true"
-          inputId="checkout"
-          placeholder="Select date"
-          styleClass="w-full">
-        </p-calendar>
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-calendar"></i>
+          <p-calendar 
+            inputId="checkout"
+            placeholder="Select date"
+            styleClass="w-full"
+            inputStyleClass="pl-10">
+          </p-calendar>
+        </span>
       </div>
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Guests</label>
-        <p-dropdown 
-          [options]="guestOptions()"
-          placeholder="Select guests"
-          optionLabel="label"
-          optionValue="value"
-          styleClass="w-full">
-        </p-dropdown>
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-users"></i>
+          <p-dropdown 
+            [options]="guestOptions()"
+            placeholder="Select guests"
+            optionLabel="label"
+            optionValue="value"
+            styleClass="w-full"
+            panelStyleClass="w-full">
+          </p-dropdown>
+        </span>
       </div>
     </div>
     <div class="px-6 pb-6 text-center">
