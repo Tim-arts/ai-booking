@@ -7,6 +7,8 @@ import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
+import { AuthService } from '../../services/auth.service';
+import { inject } from '@angular/core';
 
 // Custom validator for password confirmation
 function passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -36,6 +38,8 @@ function passwordMatchValidator(control: AbstractControl): { [key: string]: bool
   ]
 })
 export class AuthModalComponent {
+  private readonly authService = inject(AuthService);
+  
   readonly isOpen = input<boolean>(false);
   readonly close = output<void>();
   readonly authSuccess = output<{ user: any; isLogin: boolean }>();
@@ -85,26 +89,16 @@ export class AuthModalComponent {
 
       const { email, password } = this.loginForm.value;
 
-      // Simulate API call
-      setTimeout(() => {
-        // Mock authentication logic
-        if (email === 'demo@bookease.com' && password === 'password') {
-          const user = {
-            id: '1',
-            email: email,
-            firstName: 'Demo',
-            lastName: 'User',
-            avatar: null
-          };
-          
+      this.authService.login({ email: email!, password: password! }).subscribe({
+        next: (user) => {
           this.authSuccess.emit({ user, isLogin: true });
-          this.closeModal();
-        } else {
+          this.isLoading.set(false);
+        },
+        error: (error) => {
           this.authError.set('Invalid email or password. Try demo@bookease.com / password');
+          this.isLoading.set(false);
         }
-        
-        this.isLoading.set(false);
-      }, 1500);
+      });
     }
   }
 
@@ -115,21 +109,21 @@ export class AuthModalComponent {
 
       const formData = this.registerForm.value;
 
-      // Simulate API call
-      setTimeout(() => {
-        // Mock registration logic
-        const user = {
-          id: Date.now().toString(),
-          email: formData.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          avatar: null
-        };
-        
-        this.authSuccess.emit({ user, isLogin: false });
-        this.closeModal();
-        this.isLoading.set(false);
-      }, 2000);
+      this.authService.register({
+        firstName: formData.firstName!,
+        lastName: formData.lastName!,
+        email: formData.email!,
+        password: formData.password!
+      }).subscribe({
+        next: (user) => {
+          this.authSuccess.emit({ user, isLogin: false });
+          this.isLoading.set(false);
+        },
+        error: (error) => {
+          this.authError.set('Registration failed. Please try again.');
+          this.isLoading.set(false);
+        }
+      });
     }
   }
 }
