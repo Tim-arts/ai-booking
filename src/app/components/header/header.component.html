@@ -14,23 +14,6 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:block">
         <div class="flex items-center space-x-8">
-          <a routerLink="/" routerLinkActive="text-primary-600" [routerLinkActiveOptions]="{exact: true}"
-             class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-            Home
-          </a>
-          <a routerLink="/search" routerLinkActive="text-primary-600"
-             class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-            Search
-          </a>
-          <a routerLink="/about" routerLinkActive="text-primary-600"
-             class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-            About
-          </a>
-          <a routerLink="/contact" routerLinkActive="text-primary-600"
-             class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-            Contact
-          </a>
-          
           <!-- Auth Section -->
           @if (isLoggedIn()) {
             <app-user-menu />
@@ -65,29 +48,8 @@
     @if (isMenuOpen()) {
       <div class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-          <a routerLink="/" routerLinkActive="bg-primary-50 text-primary-600" [routerLinkActiveOptions]="{exact: true}"
-             (click)="closeMenu()"
-             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition-colors duration-200">
-            Home
-          </a>
-          <a routerLink="/search" routerLinkActive="bg-primary-50 text-primary-600"
-             (click)="closeMenu()"
-             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition-colors duration-200">
-            Search
-          </a>
-          <a routerLink="/about" routerLinkActive="bg-primary-50 text-primary-600"
-             (click)="closeMenu()"
-             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition-colors duration-200">
-            About
-          </a>
-          <a routerLink="/contact" routerLinkActive="bg-primary-50 text-primary-600"
-             (click)="closeMenu()"
-             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition-colors duration-200">
-            Contact
-          </a>
-          
           <!-- Mobile Auth Section -->
-          <div class="pt-2 border-t border-gray-200">
+          <div class="pt-2">
             @if (isLoggedIn()) {
               <div class="px-3 py-2">
                 <div class="flex items-center space-x-3 mb-3">
