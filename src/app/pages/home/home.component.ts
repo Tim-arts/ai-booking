@@ -1,6 +1,8 @@
 import { Component, inject, signal, computed, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
+import { SearchService } from '../../services/search.service';
 import { type Booking } from '../../types/booking.types';
 
 // PrimeNG Imports
@@ -41,7 +43,9 @@ interface SearchForm {
   ]
 })
 export class HomeComponent implements OnInit {
+  private readonly router = inject(Router);
   private readonly bookingService = inject(BookingService);
+  private readonly searchService = inject(SearchService);
   
   readonly featuredBookings = signal<Booking[]>([]);
   readonly isLoading = signal(true);
@@ -165,7 +169,14 @@ export class HomeComponent implements OnInit {
       return;
     }
     
-    // Here you would typically navigate to search results or perform the search
-    alert(`Searching for ${this.searchForm.destination} from ${this.searchForm.checkIn.toLocaleDateString()} to ${this.searchForm.checkOut.toLocaleDateString()} for ${this.searchForm.guests} guests`);
+    // Navigate to loading page with search params
+    this.searchService.setSearchParams({
+      destination: this.searchForm.destination.trim(),
+      checkIn: this.searchForm.checkIn,
+      checkOut: this.searchForm.checkOut,
+      guests: this.searchForm.guests
+    });
+    
+    this.router.navigate(['/search-loading']);
   }
 }
