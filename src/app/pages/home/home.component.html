@@ -116,15 +116,16 @@
               <div class="space-y-4">
                 <div class="relative">
                   <img 
-                    [src]="booking.imageUrl" 
+                    [src]="booking.image" 
                     [alt]="booking.title"
                     class="w-full h-48 object-cover rounded-lg"
                   />
                   <p-tag 
                     [value]="booking.category"
                     class="absolute top-3 left-3"
-                    [severity]="booking.category === 'Adventure' ? 'danger' : 
-                               booking.category === 'Relaxation' ? 'success' : 'info'"
+                    [severity]="booking.category === 'resort' ? 'success' : 
+                               booking.category === 'villa' ? 'warning' : 
+                               booking.category === 'apartment' ? 'info' : 'secondary'"
                   ></p-tag>
                 </div>
                 
