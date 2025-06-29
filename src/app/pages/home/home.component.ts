@@ -12,8 +12,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MessageModule } from 'primeng/message';
-import { TagModule } from 'primeng/tag';
+import { ChipModule } from 'primeng/chip';
 import { RatingModule } from 'primeng/rating';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-home',
@@ -29,8 +30,9 @@ import { RatingModule } from 'primeng/rating';
     DropdownModule,
     SkeletonModule,
     MessageModule,
-    TagModule,
-    RatingModule
+    ChipModule,
+    RatingModule,
+    PanelModule
   ]
 })
 export class HomeComponent implements OnInit {
@@ -82,6 +84,9 @@ export class HomeComponent implements OnInit {
   }
 
   public loadFeaturedBookings(): void {
+    this.isLoading.set(true);
+    this.error.set(null);
+    
     this.bookingService.getFeaturedBookings().subscribe({
       next: (bookings) => {
         this.featuredBookings.set(bookings);
@@ -93,9 +98,5 @@ export class HomeComponent implements OnInit {
         console.error('Error loading featured bookings:', err);
       }
     });
-  }
-
-  getStarArray(rating: number): number[] {
-    return Array(Math.floor(rating)).fill(0);
   }
 }
