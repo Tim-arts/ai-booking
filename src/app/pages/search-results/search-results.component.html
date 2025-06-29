@@ -83,7 +83,7 @@
                   [min]="priceRange().min"
                   [max]="priceRange().max"
                   [step]="10"
-                  (onSlideEnd)="onPriceFilterChange($event.value)"
+                  (onSlideEnd)="onPriceFilterChange($event.value as number)"
                   styleClass="w-full">
                 </p-slider>
                 <div class="flex justify-between text-sm text-gray-500 mt-2">
@@ -213,7 +213,6 @@
                       <p-rating 
                         [ngModel]="flight.rating" 
                         [readonly]="true"
-                        [cancel]="false"
                         styleClass="text-sm">
                       </p-rating>
                       <span class="text-sm text-gray-600">{{ flight.rating }}</span>
