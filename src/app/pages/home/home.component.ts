@@ -1,5 +1,4 @@
 import { Component, inject, signal, computed, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 import { type Booking } from '../../types/booking.types';
@@ -18,12 +17,18 @@ import { PanelModule } from 'primeng/panel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
+interface SearchForm {
+  destination: string;
+  checkIn: Date | null;
+  checkOut: Date | null;
+  guests: number;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    RouterLink,
     FormsModule,
     CardModule,
     ButtonModule,
@@ -46,11 +51,45 @@ export class HomeComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
 
+  // Search form data
+  searchForm: SearchForm = {
+    destination: '',
+    checkIn: null,
+    checkOut: null,
+    guests: 2
+  };
+
+  // Date constraints
+  readonly minDate = new Date();
+  readonly maxCheckInDate = computed(() => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    return date;
+  });
+
+  readonly minCheckOutDate = computed(() => {
+    if (this.searchForm.checkIn) {
+      const date = new Date(this.searchForm.checkIn);
+      date.setDate(date.getDate() + 1);
+      return date;
+    }
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    return date;
+  });
+
+  readonly maxCheckOutDate = computed(() => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    return date;
+  });
+
   readonly guestOptions = computed(() => [
     { label: '1 Guest', value: 1 },
     { label: '2 Guests', value: 2 },
     { label: '3 Guests', value: 3 },
-    { label: '4+ Guests', value: 4 }
+    { label: '4 Guests', value: 4 },
+    { label: '5+ Guests', value: 5 }
   ]);
 
   readonly stats = computed(() => [
@@ -102,5 +141,35 @@ export class HomeComponent implements OnInit {
         console.error('Error loading featured bookings:', err);
       }
     });
+  }
+
+  onCheckInSelect(date: Date): void {
+    // Clear check-out if it's before the new check-in date
+    if (this.searchForm.checkOut && this.searchForm.checkOut <= date) {
+      this.searchForm.checkOut = null;
+    }
+  }
+
+  onSearch(): void {
+    console.log('Search form data:', this.searchForm);
+    
+    // Validate form
+    if (!this.searchForm.destination.trim()) {
+      alert('Please enter a destination');
+      return;
+    }
+    
+    if (!this.searchForm.checkIn) {
+      alert('Please select a check-in date');
+      return;
+    }
+    
+    if (!this.searchForm.checkOut) {
+      alert('Please select a check-out date');
+      return;
+    }
+    
+    // Here you would typically navigate to search results or perform the search
+    alert(`Searching for ${this.searchForm.destination} from ${this.searchForm.checkIn.toLocaleDateString()} to ${this.searchForm.checkOut.toLocaleDateString()} for ${this.searchForm.guests} guests`);
   }
 }

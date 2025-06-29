@@ -63,6 +63,7 @@
             type="text" 
             placeholder="Search destinations..."
             class="flex-1"
+            [(ngModel)]="searchForm.destination"
           />
         </p-inputGroup>
       </div>
@@ -74,9 +75,15 @@
           </p-inputGroupAddon>
           <p-calendar 
             inputId="checkin"
-            placeholder="Select date"
-            styleClass="w-full"
-            inputStyleClass="w-full">
+            placeholder="Select check-in date"
+            [showIcon]="false"
+            [minDate]="minDate"
+            [maxDate]="maxCheckInDate"
+            dateFormat="mm/dd/yy"
+            styleClass="flex-1"
+            inputStyleClass="w-full border-l-0"
+            [(ngModel)]="searchForm.checkIn"
+            (onSelect)="onCheckInSelect($event)">
           </p-calendar>
         </p-inputGroup>
       </div>
@@ -88,9 +95,15 @@
           </p-inputGroupAddon>
           <p-calendar 
             inputId="checkout"
-            placeholder="Select date"
-            styleClass="w-full"
-            inputStyleClass="w-full">
+            placeholder="Select check-out date"
+            [showIcon]="false"
+            [minDate]="minCheckOutDate"
+            [maxDate]="maxCheckOutDate"
+            dateFormat="mm/dd/yy"
+            styleClass="flex-1"
+            inputStyleClass="w-full border-l-0"
+            [(ngModel)]="searchForm.checkOut"
+            [disabled]="!searchForm.checkIn">
           </p-calendar>
         </p-inputGroup>
       </div>
@@ -105,7 +118,8 @@
             placeholder="Select guests"
             optionLabel="label"
             optionValue="value"
-            styleClass="w-full">
+            styleClass="flex-1"
+            [(ngModel)]="searchForm.guests">
           </p-dropdown>
         </p-inputGroup>
       </div>
@@ -114,7 +128,8 @@
       <p-button 
         label="Search Now" 
         icon="pi pi-search"
-        size="large">
+        size="large"
+        (onClick)="onSearch()">
       </p-button>
     </div>
   </p-panel>
