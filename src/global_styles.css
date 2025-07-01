@@ -198,6 +198,29 @@ body {
   border-top: 1px solid var(--border-color);
 }
 
+/* Panel theme support - This was missing! */
+.p-panel {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px var(--shadow-light);
+}
+
+.p-panel .p-panel-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.p-panel .p-panel-content {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.p-panel .p-panel-footer {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
 /* Dialog theme support */
 .p-dialog {
   background-color: var(--bg-primary);
