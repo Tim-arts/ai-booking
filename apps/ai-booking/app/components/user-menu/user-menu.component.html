@@ -1,0 +1,18 @@
+<div class="relative">
+  <!-- User Avatar Button -->
+  <p-button
+    (onClick)="toggleMenu($event)"
+    [text]="true"
+    styleClass="p-2 flex items-center space-x-2"
+  >
+    <p-avatar [label]="userInitials()" size="normal" shape="circle"> </p-avatar>
+    <span class="hidden md:block text-sm font-medium text-gray-700 ml-2">{{ userFullName() }}</span>
+    <i
+      class="pi pi-chevron-down text-gray-400 transition-transform duration-200 ml-1"
+      [class.rotate-180]="isMenuOpen()"
+    ></i>
+  </p-button>
+
+  <!-- Dropdown Menu -->
+  <p-menu #menu [model]="menuItems()" [popup]="true" styleClass="mt-2"> </p-menu>
+</div>

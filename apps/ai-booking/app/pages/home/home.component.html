@@ -1,0 +1,320 @@
+<!-- Hero Section -->
+<section
+  class="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 overflow-hidden"
+>
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img
+      src="https://images.pexels.com/photos/1134166/pexels-photo-1134166.jpeg?auto=compress&cs=tinysrgb&w=1920"
+      alt="Beautiful travel destination"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <div class="relative max-w-7xl mx-auto section-padding min-h-screen flex items-center">
+    <div class="max-w-3xl animate-fade-in">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        Your Next
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-yellow-400">
+          Adventure
+        </span>
+        Starts Here
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
+        Discover extraordinary places, book with confidence, and create memories that last a
+        lifetime. Your perfect getaway is just one click away.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <p-button label="Start Exploring" icon="pi pi-search" size="large"> </p-button>
+        <p-button
+          label="Learn More"
+          icon="pi pi-info-circle"
+          [outlined]="true"
+          size="large"
+          severity="secondary"
+        >
+        </p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+  <div
+    class="absolute bottom-32 left-10 w-16 h-16 bg-accent-500/20 rounded-full animate-float"
+    style="animation-delay: 2s"
+  ></div>
+  <div
+    class="absolute top-1/2 right-1/4 w-12 h-12 bg-yellow-400/20 rounded-full animate-float"
+    style="animation-delay: 4s"
+  ></div>
+</section>
+
+<!-- Search Bar Section -->
+<section
+  class="bg-theme-primary shadow-xl relative -mt-16 mx-4 sm:mx-8 lg:mx-16 rounded-2xl z-10 border border-theme"
+>
+  <p-panel [toggleable]="false" styleClass="border-0 shadow-none bg-transparent">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+      <!-- Destination -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-theme-primary">Where to?</label>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-map-marker search-icon"></i>
+          <input
+            pInputText
+            type="text"
+            placeholder="Search destinations..."
+            [(ngModel)]="searchForm.destination"
+          />
+        </div>
+      </div>
+
+      <!-- Check-in -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-theme-primary">Check-in</label>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-calendar search-icon"></i>
+          <p-calendar
+            inputId="checkin"
+            placeholder="Select check-in date"
+            [showIcon]="false"
+            [minDate]="minDate"
+            [maxDate]="maxCheckInDate()"
+            dateFormat="mm/dd/yy"
+            [(ngModel)]="searchForm.checkIn"
+            (onSelect)="onCheckInSelect($event)"
+          >
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- Check-out -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-theme-primary">Check-out</label>
+        <div class="search-field search-field-with-icon">
+          <i class="pi pi-calendar search-icon"></i>
+          <p-calendar
+            inputId="checkout"
+            placeholder="Select check-out date"
+            [showIcon]="false"
+            [minDate]="minCheckOutDate()"
+            [maxDate]="maxCheckOutDate()"
+            dateFormat="mm/dd/yy"
+            [(ngModel)]="searchForm.checkOut"
+            [disabled]="!searchForm.checkIn"
+          >
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- Guests -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-theme-primary">Guests</label>
+        <div class="search-field">
+          <p-dropdown
+            [options]="guestOptions()"
+            placeholder="Select guests"
+            optionLabel="label"
+            optionValue="value"
+            [(ngModel)]="searchForm.guests"
+          >
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="flex items-center">
+                <i class="pi pi-users mr-2 text-theme-tertiary"></i>
+                <span>{{ selectedOption?.label || 'Select guests' }}</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="item" let-option>
+              <div class="flex items-center">
+                <i class="pi pi-users mr-2 text-theme-tertiary"></i>
+                <span>{{ option.label }}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 pb-6 text-center">
+      <p-button label="Search Now" icon="pi pi-search" size="large" (onClick)="onSearch()">
+      </p-button>
+    </div>
+  </p-panel>
+</section>
+
+<!-- Stats Section -->
+<section class="bg-theme-secondary section-padding">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      @for (stat of stats(); track stat.label) {
+        <div class="text-center animate-slide-up">
+          <div class="text-4xl md:text-5xl font-bold text-primary-600 mb-2">{{ stat.number }}</div>
+          <div class="text-theme-secondary font-medium">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Featured Bookings Section -->
+<section class="section-padding bg-theme-primary">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-theme-primary mb-4">Featured Destinations</h2>
+      <p class="text-xl text-theme-secondary max-w-3xl mx-auto">
+        Handpicked by our travel experts for unforgettable experiences
+      </p>
+    </div>
+
+    @if (isLoading()) {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (item of [1, 2, 3]; track item) {
+          <p-card styleClass="theme-card">
+            <ng-template pTemplate="content">
+              <div class="space-y-4">
+                <p-skeleton height="12rem" styleClass="mb-4"></p-skeleton>
+                <p-skeleton height="1rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton height="1rem" styleClass="mb-4" width="75%"></p-skeleton>
+                <p-skeleton height="2rem" width="50%"></p-skeleton>
+              </div>
+            </ng-template>
+          </p-card>
+        }
+      </div>
+    } @else if (error()) {
+      <div class="text-center py-12">
+        <p-message severity="error" [text]="error()!" styleClass="mb-4"></p-message>
+        <p-button label="Try Again" icon="pi pi-refresh" (onClick)="loadFeaturedBookings()">
+        </p-button>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (booking of featuredBookings(); track booking.id) {
+          <p-card styleClass="overflow-hidden group h-full theme-card">
+            <ng-template pTemplate="header">
+              <div class="relative overflow-hidden">
+                <img
+                  [src]="booking.image"
+                  [alt]="booking.title"
+                  class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <p-chip
+                  [label]="'$' + booking.price + '/night'"
+                  styleClass="absolute top-4 right-4 bg-white/90 text-gray-800"
+                >
+                </p-chip>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="content">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between mb-3">
+                  <p-chip [label]="booking.location" styleClass="bg-primary-100 text-primary-800">
+                  </p-chip>
+                  <div class="flex items-center space-x-1">
+                    <p-rating [ngModel]="booking.rating" [readonly]="true" styleClass="text-sm">
+                    </p-rating>
+                    <span class="text-sm text-theme-secondary ml-1"
+                      >{{ booking.rating }} ({{ booking.reviewCount }})</span
+                    >
+                  </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-theme-primary mb-3">{{ booking.title }}</h3>
+                <p class="text-theme-secondary mb-4 line-clamp-2">{{ booking.description }}</p>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+                  @for (amenity of booking.amenities.slice(0, 3); track amenity) {
+                    <p-chip
+                      [label]="amenity"
+                      styleClass="text-xs bg-theme-tertiary text-theme-secondary"
+                    >
+                    </p-chip>
+                  }
+                  @if (booking.amenities.length > 3) {
+                    <p-chip
+                      [label]="'+' + (booking.amenities.length - 3) + ' more'"
+                      styleClass="text-xs bg-theme-tertiary text-theme-secondary"
+                    >
+                    </p-chip>
+                  }
+                </div>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+              <p-button label="Book Now" icon="pi pi-calendar" styleClass="w-full justify-center">
+              </p-button>
+            </ng-template>
+          </p-card>
+        }
+      </div>
+    }
+
+    <div class="text-center mt-12">
+      <p-button
+        label="View All Destinations"
+        icon="pi pi-arrow-right"
+        [outlined]="true"
+        styleClass="px-8 py-3"
+      >
+      </p-button>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section
+  class="section-padding bg-gradient-to-br from-primary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-theme-primary mb-4">Why Choose BookEase?</h2>
+      <p class="text-xl text-theme-secondary max-w-3xl mx-auto">
+        We make booking simple, secure, and memorable
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (feature of features(); track feature.title) {
+        <p-card styleClass="text-center group h-full theme-card">
+          <ng-template pTemplate="content">
+            <div
+              class="w-20 h-20 mx-auto mb-6 bg-theme-primary rounded-full flex items-center justify-center text-4xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300"
+            >
+              {{ feature.icon }}
+            </div>
+            <h3 class="text-xl font-bold text-theme-primary mb-3">{{ feature.title }}</h3>
+            <p class="text-theme-secondary leading-relaxed">{{ feature.description }}</p>
+          </ng-template>
+        </p-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready for Your Next Adventure?</h2>
+    <p class="text-xl mb-8 opacity-90">
+      Join thousands of happy travelers who trust BookEase for their perfect getaways. Start
+      planning your dream trip today!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <p-button label="Start Booking Now" icon="pi pi-calendar" size="large" severity="secondary">
+      </p-button>
+      <p-button
+        label="Download Our App"
+        icon="pi pi-mobile"
+        [outlined]="true"
+        size="large"
+        severity="secondary"
+      >
+      </p-button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+/* CSS Custom Properties for Theme System */
+
+/* Light theme variables (default) */
+:root {
+  /* Background colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+
+  /* Text colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+
+  /* Border colors */
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+
+  /* Shadow colors */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --border-color: #374151;
+    --border-light: #4b5563;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Force dark theme when .dark-theme class is present */
+.dark-theme {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --border-color: #374151;
+  --border-light: #4b5563;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-light: rgba(0, 0, 0, 0.2);
+}

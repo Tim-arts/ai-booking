@@ -1,0 +1,72 @@
+/* Form Component Styles */
+
+.search-field {
+  width: 100%;
+}
+
+.search-field .p-inputtext,
+.search-field .p-calendar .p-inputtext,
+.search-field .p-dropdown {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.search-field .p-inputtext:focus,
+.search-field .p-calendar .p-inputtext:focus,
+.search-field .p-dropdown:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.search-field .p-calendar {
+  width: 100%;
+}
+
+.search-field .p-dropdown {
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
+.search-field .p-dropdown .p-dropdown-label {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.search-field .p-dropdown .p-dropdown-trigger {
+  width: 3rem;
+  border-left: 1px solid var(--border-color);
+}
+
+/* Icon styling for search fields */
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.search-field-with-icon {
+  position: relative;
+}
+
+.search-field-with-icon .p-inputtext,
+.search-field-with-icon .p-calendar .p-inputtext {
+  padding-left: 2.5rem;
+}
+
+/* Calendar specific fixes */
+.search-field .p-calendar .p-datepicker-trigger {
+  display: none;
+}

@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  content: ['./apps/**/*.{html,ts}'],
   darkMode: 'media', // Enable automatic dark mode based on system preference
   theme: {
     extend: {
@@ -32,7 +30,7 @@ module.exports = {
           700: '#374151',
           800: '#1f2937',
           900: '#111827',
-        }
+        },
       },
       ringColor: {
         'primary-200': '#bfdbfe',
@@ -43,7 +41,7 @@ module.exports = {
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.6s ease-out',
-        'float': 'float 6s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -57,9 +55,9 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
-        }
-      }
+        },
+      },
     },
   },
   plugins: [],
-}
+};
