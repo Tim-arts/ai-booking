@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
+    "start": "npm run ai-booking:serve",
     "ai-booking:serve": "nx run ai-booking:serve",
     "ai-booking:build": "nx run ai-booking:build",
     "lint": "eslint src/**/*.ts",
