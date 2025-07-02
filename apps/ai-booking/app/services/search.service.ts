@@ -1,11 +1,15 @@
 import { Injectable, signal } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
+import { PackageType, HotelAmenity, CarFeature } from '../types/booking.types';
 
 export interface SearchParams {
   destination: string;
   checkIn: Date;
   checkOut: Date;
   guests: number;
+  packageType: PackageType;
+  hotelAmenities?: HotelAmenity[];
+  carFeatures?: CarFeature[];
 }
 
 export interface FlightResult {
@@ -25,12 +29,40 @@ export interface FlightResult {
   rating: number;
 }
 
+export interface HotelResult {
+  id: string;
+  name: string;
+  rating: number;
+  price: number;
+  image: string;
+  amenities: HotelAmenity[];
+  description: string;
+}
+
+export interface CarResult {
+  id: string;
+  model: string;
+  category: string;
+  price: number;
+  image: string;
+  features: CarFeature[];
+  company: string;
+}
+
+export interface SearchResults {
+  flights: FlightResult[];
+  hotels?: HotelResult[];
+  cars?: CarResult[];
+  totalPrice: number;
+  savings?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
   private readonly currentSearch = signal<SearchParams | null>(null);
-  private readonly searchResults = signal<FlightResult[]>([]);
+  private readonly searchResults = signal<SearchResults | null>(null);
 
   readonly search = this.currentSearch.asReadonly();
   readonly results = this.searchResults.asReadonly();
@@ -39,11 +71,11 @@ export class SearchService {
     this.currentSearch.set(params);
   }
 
-  searchFlights(params: SearchParams): Observable<FlightResult[]> {
+  searchPackages(params: SearchParams): Observable<SearchResults> {
     this.setSearchParams(params);
 
-    // Mock flight search results
-    const mockResults: FlightResult[] = [
+    // Mock search results based on package type
+    const mockFlights: FlightResult[] = [
       {
         id: '1',
         airline: 'SkyWings Airlines',
@@ -76,57 +108,104 @@ export class SearchService {
         baggage: '1 carry-on, 1 checked bag',
         rating: 4.2,
       },
+    ];
+
+    const mockHotels: HotelResult[] = [
       {
-        id: '3',
-        airline: 'AeroConnect',
-        airlineCode: 'AC',
-        departureTime: '19:10',
-        arrivalTime: '23:30',
-        duration: '4h 20m',
-        price: 189,
-        stops: 1,
-        aircraft: 'Boeing 757',
-        departureAirport: 'JFK',
-        arrivalAirport: this.getDestinationCode(params.destination),
-        availableSeats: 15,
-        baggage: '1 carry-on included',
-        rating: 3.9,
-      },
-      {
-        id: '4',
-        airline: 'Premium Airways',
-        airlineCode: 'PA',
-        departureTime: '06:15',
-        arrivalTime: '09:20',
-        duration: '3h 05m',
-        price: 399,
-        stops: 0,
-        aircraft: 'Boeing 787',
-        departureAirport: 'JFK',
-        arrivalAirport: this.getDestinationCode(params.destination),
-        availableSeats: 6,
-        baggage: '2 carry-on, 2 checked bags',
+        id: '1',
+        name: 'Ocean View Resort',
         rating: 4.8,
+        price: 189,
+        image: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=400',
+        amenities: ['wifi', 'pool', 'spa', 'restaurant', 'beach-access'],
+        description: 'Luxury beachfront resort with stunning ocean views',
       },
       {
-        id: '5',
-        airline: 'Budget Fly',
-        airlineCode: 'BF',
-        departureTime: '12:45',
-        arrivalTime: '18:15',
-        duration: '5h 30m',
-        price: 149,
-        stops: 2,
-        aircraft: 'Airbus A319',
-        departureAirport: 'JFK',
-        arrivalAirport: this.getDestinationCode(params.destination),
-        availableSeats: 20,
-        baggage: 'Carry-on extra',
-        rating: 3.5,
+        id: '2',
+        name: 'Downtown Business Hotel',
+        rating: 4.5,
+        price: 129,
+        image: 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400',
+        amenities: ['wifi', 'gym', 'business-center', 'restaurant', 'parking'],
+        description: 'Modern hotel in the heart of the business district',
       },
     ];
 
-    return of(mockResults).pipe(
+    const mockCars: CarResult[] = [
+      {
+        id: '1',
+        model: 'Toyota Camry',
+        category: 'Standard',
+        price: 45,
+        image: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=400',
+        features: ['automatic', 'air-conditioning', 'bluetooth', 'fuel-efficient'],
+        company: 'Enterprise',
+      },
+      {
+        id: '2',
+        model: 'BMW X3',
+        category: 'SUV',
+        price: 89,
+        image: 'https://images.pexels.com/photos/244206/pexels-photo-244206.jpeg?auto=compress&cs=tinysrgb&w=400',
+        features: ['automatic', 'air-conditioning', 'gps', 'all-wheel-drive', 'luxury'],
+        company: 'Hertz',
+      },
+    ];
+
+    // Build results based on package type
+    let results: SearchResults = {
+      flights: mockFlights,
+      totalPrice: 0,
+    };
+
+    const flightPrice = mockFlights[0].price;
+    let totalPrice = flightPrice;
+    let savings = 0;
+
+    switch (params.packageType) {
+      case 'flight-only':
+        results.totalPrice = flightPrice;
+        break;
+      
+      case 'flight-hotel':
+        results.hotels = mockHotels;
+        totalPrice = flightPrice + mockHotels[0].price;
+        savings = 50; // Bundle savings
+        results.totalPrice = totalPrice - savings;
+        results.savings = savings;
+        break;
+      
+      case 'flight-car':
+        results.cars = mockCars;
+        totalPrice = flightPrice + (mockCars[0].price * 7); // 7 days
+        savings = 30;
+        results.totalPrice = totalPrice - savings;
+        results.savings = savings;
+        break;
+      
+      case 'flight-hotel-car':
+        results.hotels = mockHotels;
+        results.cars = mockCars;
+        totalPrice = flightPrice + mockHotels[0].price + (mockCars[0].price * 7);
+        savings = 100; // Maximum bundle savings
+        results.totalPrice = totalPrice - savings;
+        results.savings = savings;
+        break;
+      
+      case 'hotel-only':
+        results.flights = [];
+        results.hotels = mockHotels;
+        results.totalPrice = mockHotels[0].price;
+        break;
+      
+      case 'car-only':
+        results.flights = [];
+        results.cars = mockCars;
+        results.totalPrice = mockCars[0].price * 7;
+        break;
+    }
+
+    return of(results).pipe(
       delay(3000) // Simulate search time
     );
   }
@@ -147,12 +226,12 @@ export class SearchService {
     return codes[key] || 'XXX';
   }
 
-  setResults(results: FlightResult[]): void {
+  setResults(results: SearchResults): void {
     this.searchResults.set(results);
   }
 
   clearSearch(): void {
     this.currentSearch.set(null);
-    this.searchResults.set([]);
+    this.searchResults.set(null);
   }
 }

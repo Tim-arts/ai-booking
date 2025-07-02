@@ -5,16 +5,15 @@
       <p-card styleClass="mb-8 shadow-lg theme-card">
         <ng-template pTemplate="header">
           <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6">
-            <h1 class="text-2xl font-bold mb-2">Searching Your Perfect Flight</h1>
+            <h1 class="text-2xl font-bold mb-2">Searching Your Perfect {{ getPackageLabel(params.packageType) }}</h1>
             <p class="text-primary-100">We're finding the best options for your trip</p>
           </div>
         </ng-template>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+        <!-- Basic Trip Info -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 border-b border-theme">
           <div class="text-center">
-            <div
-              class="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mx-auto mb-3"
-            >
+            <div class="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mx-auto mb-3">
               <i class="pi pi-map-marker text-primary-600 text-xl"></i>
             </div>
             <h3 class="font-semibold text-theme-primary mb-1">Destination</h3>
@@ -22,9 +21,7 @@
           </div>
 
           <div class="text-center">
-            <div
-              class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-3"
-            >
+            <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-3">
               <i class="pi pi-calendar text-green-600 text-xl"></i>
             </div>
             <h3 class="font-semibold text-theme-primary mb-1">Check-in</h3>
@@ -32,9 +29,7 @@
           </div>
 
           <div class="text-center">
-            <div
-              class="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mx-auto mb-3"
-            >
+            <div class="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mx-auto mb-3">
               <i class="pi pi-calendar text-orange-600 text-xl"></i>
             </div>
             <h3 class="font-semibold text-theme-primary mb-1">Check-out</h3>
@@ -42,9 +37,7 @@
           </div>
 
           <div class="text-center">
-            <div
-              class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mx-auto mb-3"
-            >
+            <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mx-auto mb-3">
               <i class="pi pi-users text-purple-600 text-xl"></i>
             </div>
             <h3 class="font-semibold text-theme-primary mb-1">Travelers</h3>
@@ -54,13 +47,41 @@
           </div>
         </div>
 
-        <div class="px-6 pb-6">
-          <div class="bg-theme-secondary rounded-lg p-4 text-center">
+        <!-- Package Details -->
+        <div class="p-6">
+          <div class="bg-theme-secondary rounded-lg p-4 mb-4">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-theme-primary">{{ getPackageLabel(params.packageType) }}</h3>
+              <p-tag [value]="getPackageIcon(params.packageType)" severity="info" />
+            </div>
             <p class="text-sm text-theme-secondary">
-              <i class="pi pi-info-circle mr-2"></i>
               {{ getDaysDifference() }} night{{ getDaysDifference() !== 1 ? 's' : '' }} trip
             </p>
           </div>
+
+          <!-- Hotel Preferences -->
+          @if (params.hotelAmenities && params.hotelAmenities.length > 0) {
+            <div class="mb-4">
+              <h4 class="font-medium text-theme-primary mb-2">Hotel Preferences</h4>
+              <div class="flex flex-wrap gap-2">
+                @for (amenity of params.hotelAmenities; track amenity) {
+                  <p-tag [value]="getAmenityLabel(amenity)" severity="secondary" styleClass="text-xs" />
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Car Preferences -->
+          @if (params.carFeatures && params.carFeatures.length > 0) {
+            <div class="mb-4">
+              <h4 class="font-medium text-theme-primary mb-2">Car Preferences</h4>
+              <div class="flex flex-wrap gap-2">
+                @for (feature of params.carFeatures; track feature) {
+                  <p-tag [value]="getFeatureLabel(feature)" severity="secondary" styleClass="text-xs" />
+                }
+              </div>
+            </div>
+          }
         </div>
       </p-card>
     }
@@ -76,61 +97,48 @@
               strokeWidth="3"
               fill="transparent"
               animationDuration="1s"
-            >
-            </p-progressSpinner>
+            />
           </div>
 
           <!-- Loading Message -->
           <h2 class="text-2xl font-bold text-theme-primary mb-4">{{ currentMessage() }}</h2>
           <p class="text-theme-secondary mb-8 max-w-md mx-auto">
-            Please wait while we search through hundreds of airlines to find you the best deals and
-            flight options.
+            Please wait while we search through hundreds of providers to find you the best deals and options.
           </p>
 
           <!-- Loading Steps -->
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div class="flex flex-col items-center">
-              <div
-                class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2"
-              >
+              <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2">
                 <i class="pi pi-check text-sm"></i>
               </div>
               <p class="text-sm font-medium text-theme-primary">Search Initiated</p>
             </div>
             <div class="flex flex-col items-center">
-              <div
-                class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2 animate-pulse"
-              >
+              <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white mb-2 animate-pulse">
                 <i class="pi pi-search text-sm"></i>
               </div>
-              <p class="text-sm font-medium text-theme-primary">Finding Flights</p>
+              <p class="text-sm font-medium text-theme-primary">Finding Options</p>
             </div>
             <div class="flex flex-col items-center">
-              <div
-                class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2"
-              >
+              <div class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2">
                 <i class="pi pi-dollar text-sm"></i>
               </div>
               <p class="text-sm text-theme-secondary">Comparing Prices</p>
             </div>
             <div class="flex flex-col items-center">
-              <div
-                class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2"
-              >
+              <div class="w-10 h-10 bg-theme-tertiary rounded-full flex items-center justify-center text-theme-secondary mb-2">
                 <i class="pi pi-star text-sm"></i>
               </div>
               <p class="text-sm text-theme-secondary">Best Results</p>
             </div>
           </div>
 
-          <!-- Fun Facts -->
-          <div
-            class="bg-gradient-to-r from-primary-50 to-accent-50 dark:from-gray-700 dark:to-gray-800 rounded-lg p-6 mb-6"
-          >
-            <h3 class="font-semibold text-theme-primary mb-3">✈️ Did you know?</h3>
+          <!-- Package-specific info -->
+          <div class="bg-gradient-to-r from-primary-50 to-accent-50 dark:from-gray-700 dark:to-gray-800 rounded-lg p-6 mb-6">
+            <h3 class="font-semibold text-theme-primary mb-3">✨ {{ getSearchingMessage() }}</h3>
             <p class="text-theme-secondary text-sm">
-              We search through over 500 airlines and travel partners to ensure you get the best
-              possible price and flight options for your journey.
+              {{ getSearchingDescription() }}
             </p>
           </div>
 
@@ -141,8 +149,7 @@
             [outlined]="true"
             severity="secondary"
             (onClick)="onCancel()"
-          >
-          </p-button>
+          />
         </div>
       </ng-template>
     </p-card>

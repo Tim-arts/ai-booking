@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 import { SearchService } from '../../services/search.service';
 import { type Booking } from '../../types/booking.types';
+import { PackageType, HotelAmenity, CarFeature } from '../../types/booking.types';
 
 // PrimeNG Imports
 import { CardModule } from 'primeng/card';
@@ -26,12 +27,26 @@ import { PanelModule } from 'primeng/panel';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { AvatarModule } from 'primeng/avatar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 interface SearchForm {
   destination: string;
   checkIn: Date | null;
   checkOut: Date | null;
   guests: number;
+  packageType: PackageType;
+  hotelAmenities: HotelAmenity[];
+  carFeatures: CarFeature[];
+}
+
+interface PackageOption {
+  type: PackageType;
+  label: string;
+  description: string;
+  basePrice: number;
+  savings?: number;
+  popular?: boolean;
+  icon: string;
 }
 
 @Component({
@@ -53,6 +68,7 @@ interface SearchForm {
     IconFieldModule,
     InputIconModule,
     AvatarModule,
+    CheckboxModule,
   ],
 })
 export class HomeComponent implements OnInit {
@@ -70,6 +86,9 @@ export class HomeComponent implements OnInit {
     checkIn: null,
     checkOut: null,
     guests: 2,
+    packageType: 'flight-hotel',
+    hotelAmenities: [],
+    carFeatures: [],
   };
 
   // Date constraints
@@ -104,6 +123,99 @@ export class HomeComponent implements OnInit {
     { label: '4 Guests', value: 4 },
     { label: '5+ Guests', value: 5 },
   ]);
+
+  readonly packageOptions = computed((): PackageOption[] => [
+    {
+      type: 'flight-only',
+      label: 'Flight Only',
+      description: 'Just the flight',
+      basePrice: 299,
+      icon: '✈️',
+    },
+    {
+      type: 'flight-hotel',
+      label: 'Flight + Hotel',
+      description: 'Flight and accommodation',
+      basePrice: 449,
+      savings: 50,
+      popular: true,
+      icon: '🏨',
+    },
+    {
+      type: 'flight-car',
+      label: 'Flight + Car',
+      description: 'Flight and rental car',
+      basePrice: 399,
+      savings: 30,
+      icon: '🚗',
+    },
+    {
+      type: 'flight-hotel-car',
+      label: 'Complete Package',
+      description: 'Flight, hotel, and car',
+      basePrice: 599,
+      savings: 100,
+      icon: '🎯',
+    },
+    {
+      type: 'hotel-only',
+      label: 'Hotel Only',
+      description: 'Just accommodation',
+      basePrice: 189,
+      icon: '🏨',
+    },
+    {
+      type: 'car-only',
+      label: 'Car Only',
+      description: 'Just rental car',
+      basePrice: 45,
+      icon: '🚗',
+    },
+  ]);
+
+  readonly hotelAmenityOptions = computed(() => [
+    { value: 'wifi' as HotelAmenity, label: 'WiFi', icon: '📶' },
+    { value: 'pool' as HotelAmenity, label: 'Pool', icon: '🏊' },
+    { value: 'gym' as HotelAmenity, label: 'Gym', icon: '💪' },
+    { value: 'spa' as HotelAmenity, label: 'Spa', icon: '🧘' },
+    { value: 'restaurant' as HotelAmenity, label: 'Restaurant', icon: '🍽️' },
+    { value: 'bar' as HotelAmenity, label: 'Bar', icon: '🍸' },
+    { value: 'room-service' as HotelAmenity, label: 'Room Service', icon: '🛎️' },
+    { value: 'concierge' as HotelAmenity, label: 'Concierge', icon: '🎩' },
+    { value: 'business-center' as HotelAmenity, label: 'Business Center', icon: '💼' },
+    { value: 'pet-friendly' as HotelAmenity, label: 'Pet Friendly', icon: '🐕' },
+    { value: 'parking' as HotelAmenity, label: 'Parking', icon: '🅿️' },
+    { value: 'airport-shuttle' as HotelAmenity, label: 'Airport Shuttle', icon: '🚌' },
+    { value: 'beach-access' as HotelAmenity, label: 'Beach Access', icon: '🏖️' },
+    { value: 'balcony' as HotelAmenity, label: 'Balcony', icon: '🌅' },
+    { value: 'kitchen' as HotelAmenity, label: 'Kitchen', icon: '👨‍🍳' },
+    { value: 'air-conditioning' as HotelAmenity, label: 'A/C', icon: '❄️' },
+  ]);
+
+  readonly carFeatureOptions = computed(() => [
+    { value: 'automatic' as CarFeature, label: 'Automatic', icon: '⚙️' },
+    { value: 'air-conditioning' as CarFeature, label: 'A/C', icon: '❄️' },
+    { value: 'gps' as CarFeature, label: 'GPS', icon: '🗺️' },
+    { value: 'bluetooth' as CarFeature, label: 'Bluetooth', icon: '📱' },
+    { value: 'backup-camera' as CarFeature, label: 'Backup Camera', icon: '📹' },
+    { value: 'cruise-control' as CarFeature, label: 'Cruise Control', icon: '🎛️' },
+    { value: 'heated-seats' as CarFeature, label: 'Heated Seats', icon: '🔥' },
+    { value: 'sunroof' as CarFeature, label: 'Sunroof', icon: '☀️' },
+    { value: 'all-wheel-drive' as CarFeature, label: 'AWD', icon: '🚙' },
+    { value: 'fuel-efficient' as CarFeature, label: 'Fuel Efficient', icon: '⛽' },
+    { value: 'luxury' as CarFeature, label: 'Luxury', icon: '💎' },
+    { value: 'suv' as CarFeature, label: 'SUV', icon: '🚗' },
+    { value: 'electric' as CarFeature, label: 'Electric', icon: '🔋' },
+    { value: 'hybrid' as CarFeature, label: 'Hybrid', icon: '🌱' },
+  ]);
+
+  readonly showHotelAmenities = computed(() => 
+    this.searchForm.packageType.includes('hotel')
+  );
+
+  readonly showCarFeatures = computed(() => 
+    this.searchForm.packageType.includes('car')
+  );
 
   readonly stats = computed(() => [
     { number: '50K+', label: 'Happy Travelers' },
@@ -158,6 +270,41 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  selectPackage(packageType: PackageType): void {
+    this.searchForm.packageType = packageType;
+    // Clear amenities/features when switching packages
+    if (!this.showHotelAmenities()) {
+      this.searchForm.hotelAmenities = [];
+    }
+    if (!this.showCarFeatures()) {
+      this.searchForm.carFeatures = [];
+    }
+  }
+
+  isHotelAmenitySelected(amenity: HotelAmenity): boolean {
+    return this.searchForm.hotelAmenities.includes(amenity);
+  }
+
+  toggleHotelAmenity(amenity: HotelAmenity, checked: boolean): void {
+    if (checked) {
+      this.searchForm.hotelAmenities = [...this.searchForm.hotelAmenities, amenity];
+    } else {
+      this.searchForm.hotelAmenities = this.searchForm.hotelAmenities.filter(a => a !== amenity);
+    }
+  }
+
+  isCarFeatureSelected(feature: CarFeature): boolean {
+    return this.searchForm.carFeatures.includes(feature);
+  }
+
+  toggleCarFeature(feature: CarFeature, checked: boolean): void {
+    if (checked) {
+      this.searchForm.carFeatures = [...this.searchForm.carFeatures, feature];
+    } else {
+      this.searchForm.carFeatures = this.searchForm.carFeatures.filter(f => f !== feature);
+    }
+  }
+
   onCheckInSelect(date: Date): void {
     // Clear check-out if it's before the new check-in date
     if (this.searchForm.checkOut && this.searchForm.checkOut <= date) {
@@ -190,6 +337,9 @@ export class HomeComponent implements OnInit {
       checkIn: this.searchForm.checkIn,
       checkOut: this.searchForm.checkOut,
       guests: this.searchForm.guests,
+      packageType: this.searchForm.packageType,
+      hotelAmenities: this.searchForm.hotelAmenities,
+      carFeatures: this.searchForm.carFeatures,
     });
 
     this.router.navigate(['/search-loading']);

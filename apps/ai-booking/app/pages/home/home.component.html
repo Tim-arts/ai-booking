@@ -65,18 +65,57 @@
 <!-- Search Bar Section with PrimeNG Panel -->
 <section class="relative -mt-16 mx-4 sm:mx-8 lg:mx-16 z-10">
   <p-panel 
-    header="Find Your Perfect Flight" 
+    header="Plan Your Perfect Trip" 
     [toggleable]="false" 
     styleClass="shadow-2xl border-0 bg-white dark:bg-gray-800"
   >
     <ng-template pTemplate="header">
       <div class="flex items-center space-x-2">
         <i class="pi pi-search text-primary-600 text-xl"></i>
-        <span class="text-xl font-bold text-theme-primary">Find Your Perfect Flight</span>
+        <span class="text-xl font-bold text-theme-primary">Plan Your Perfect Trip</span>
       </div>
     </ng-template>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-2">
+    <!-- Package Selection -->
+    <div class="mb-8">
+      <h3 class="text-lg font-semibold text-theme-primary mb-4">Choose Your Package</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        @for (pkg of packageOptions(); track pkg.type) {
+          <div 
+            class="relative cursor-pointer transition-all duration-200"
+            [class.ring-2]="searchForm.packageType === pkg.type"
+            [class.ring-primary-500]="searchForm.packageType === pkg.type"
+            [class.bg-primary-50]="searchForm.packageType === pkg.type"
+            [class.dark:bg-primary-900/20]="searchForm.packageType === pkg.type"
+            (click)="selectPackage(pkg.type)"
+          >
+            <p-card styleClass="h-full text-center hover:shadow-lg transition-shadow duration-200">
+              @if (pkg.popular) {
+                <div class="absolute -top-2 -right-2">
+                  <p-tag value="Popular" severity="success" styleClass="text-xs" />
+                </div>
+              }
+              <ng-template pTemplate="content">
+                <div class="p-4">
+                  <div class="text-2xl mb-2">{{ pkg.icon }}</div>
+                  <h4 class="font-semibold text-theme-primary mb-2">{{ pkg.label }}</h4>
+                  <p class="text-sm text-theme-secondary mb-3">{{ pkg.description }}</p>
+                  <div class="text-lg font-bold text-primary-600">
+                    From ${{ pkg.basePrice }}
+                    @if (pkg.savings) {
+                      <div class="text-sm text-green-600">Save ${{ pkg.savings }}</div>
+                    }
+                  </div>
+                </div>
+              </ng-template>
+            </p-card>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Basic Search Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
       <!-- Destination -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-theme-primary">Where to?</label>
@@ -156,11 +195,55 @@
         </p-dropdown>
       </div>
     </div>
+
+    <!-- Hotel Amenities (shown when package includes hotel) -->
+    @if (showHotelAmenities()) {
+      <div class="mb-6">
+        <h4 class="text-md font-semibold text-theme-primary mb-3">Hotel Preferences</h4>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          @for (amenity of hotelAmenityOptions(); track amenity.value) {
+            <div class="flex items-center">
+              <p-checkbox
+                [binary]="true"
+                [ngModel]="isHotelAmenitySelected(amenity.value)"
+                (onChange)="toggleHotelAmenity(amenity.value, $event.checked)"
+                styleClass="mr-2"
+              />
+              <label class="text-sm text-theme-secondary cursor-pointer" (click)="toggleHotelAmenity(amenity.value, !isHotelAmenitySelected(amenity.value))">
+                {{ amenity.icon }} {{ amenity.label }}
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Car Features (shown when package includes car) -->
+    @if (showCarFeatures()) {
+      <div class="mb-6">
+        <h4 class="text-md font-semibold text-theme-primary mb-3">Car Preferences</h4>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          @for (feature of carFeatureOptions(); track feature.value) {
+            <div class="flex items-center">
+              <p-checkbox
+                [binary]="true"
+                [ngModel]="isCarFeatureSelected(feature.value)"
+                (onChange)="toggleCarFeature(feature.value, $event.checked)"
+                styleClass="mr-2"
+              />
+              <label class="text-sm text-theme-secondary cursor-pointer" (click)="toggleCarFeature(feature.value, !isCarFeatureSelected(feature.value))">
+                {{ feature.icon }} {{ feature.label }}
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+    }
     
     <ng-template pTemplate="footer">
       <div class="text-center">
         <p-button 
-          label="Search Flights" 
+          label="Search Packages" 
           icon="pi pi-search" 
           size="large" 
           (onClick)="onSearch()"
