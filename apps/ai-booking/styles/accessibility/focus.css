@@ -1,0 +1,139 @@
+/* Focus Management and Accessibility */
+
+@layer base {
+  /* Enhanced focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid theme('colors.primary.500');
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  
+  /* Remove default focus outline */
+  *:focus {
+    outline: none;
+  }
+  
+  /* Focus within for containers */
+  .focus-within:focus-within {
+    outline: 2px solid theme('colors.primary.500');
+    outline-offset: 2px;
+  }
+}
+
+/* Skip links for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: theme('colors.primary.600');
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  z-index: var(--z-tooltip);
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap::before,
+.focus-trap::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Keyboard navigation indicators */
+.keyboard-nav .p-button:focus-visible,
+.keyboard-nav .p-inputtext:focus-visible,
+.keyboard-nav .p-dropdown:focus-visible {
+  box-shadow: 0 0 0 3px theme('colors.primary.500' / 0.3);
+}
+
+/* High contrast focus indicators */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline: 3px solid theme('colors.primary.600');
+    outline-offset: 2px;
+  }
+  
+  .p-button:focus-visible {
+    outline: 3px solid theme('colors.primary.600');
+    outline-offset: 2px;
+  }
+}
+
+/* Focus management for interactive elements */
+.interactive-element {
+  position: relative;
+}
+
+.interactive-element::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  transition: border-color 0.2s ease;
+  pointer-events: none;
+}
+
+.interactive-element:focus-visible::after {
+  border-color: theme('colors.primary.500');
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Focus indicators for custom components */
+.custom-button:focus-visible,
+.custom-input:focus-visible,
+.custom-link:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* Focus management for card components */
+.card-interactive:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* Focus styles for navigation */
+.nav-link:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+  background-color: theme('colors.primary.50');
+}
+
+/* Focus management for form elements */
+.form-input:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+.form-checkbox:focus-visible,
+.form-radio:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}

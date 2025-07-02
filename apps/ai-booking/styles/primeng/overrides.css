@@ -1,0 +1,213 @@
+/* PrimeNG Component Overrides */
+
+/* Card Components */
+.p-card {
+  transition: all var(--duration-normal) ease;
+  border-radius: var(--radius-lg);
+}
+
+.p-card:hover {
+  transform: translateY(-2px);
+}
+
+.p-card .p-card-header {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.p-card .p-card-footer {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Button Components */
+.p-button {
+  transition: all var(--duration-normal) ease;
+  border-radius: var(--radius-md);
+}
+
+.p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.p-button:active {
+  transform: translateY(0);
+}
+
+.p-button:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* Input Components */
+.p-inputtext,
+.p-dropdown,
+.p-calendar input {
+  transition: all var(--duration-normal) ease;
+  border-radius: var(--radius-md);
+}
+
+.p-inputtext:focus,
+.p-dropdown:focus,
+.p-calendar input:focus {
+  box-shadow: 0 0 0 2px theme('colors.primary.500' / 0.2);
+}
+
+.p-inputtext:focus-visible,
+.p-dropdown:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* Panel Components */
+.p-panel .p-panel-header {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.p-panel .p-panel-content {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Menu Components */
+.p-menu {
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.p-menu .p-menuitem-link {
+  transition: all var(--duration-fast) ease;
+  border-radius: var(--radius-sm);
+}
+
+.p-menu .p-menuitem-link:hover {
+  background-color: var(--bg-secondary);
+}
+
+.p-menu .p-menuitem-link:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* Dialog Components */
+.p-dialog {
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.p-dialog .p-dialog-header {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.p-dialog .p-dialog-content {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Progress Components */
+.p-progressspinner {
+  animation-duration: 1s;
+}
+
+.p-progressbar {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.p-progressbar .p-progressbar-value {
+  border-radius: var(--radius-md);
+}
+
+/* Toast Components */
+.p-toast {
+  z-index: var(--z-tooltip);
+}
+
+.p-toast .p-toast-message {
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dropdown Components */
+.p-dropdown-panel {
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.p-dropdown-item {
+  transition: all var(--duration-fast) ease;
+}
+
+.p-dropdown-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Calendar Components */
+.p-datepicker {
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.p-datepicker .p-datepicker-header {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.p-datepicker table td > span {
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) ease;
+}
+
+/* Rating Components */
+.p-rating .p-rating-icon {
+  transition: all var(--duration-fast) ease;
+}
+
+.p-rating .p-rating-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Tag Components */
+.p-tag {
+  border-radius: var(--radius-md);
+  font-weight: 500;
+}
+
+/* Skeleton Components */
+.p-skeleton {
+  border-radius: var(--radius-md);
+}
+
+/* Message Components */
+.p-message {
+  border-radius: var(--radius-md);
+}
+
+/* Slider Components */
+.p-slider {
+  border-radius: var(--radius-md);
+}
+
+.p-slider .p-slider-handle {
+  border-radius: 50%;
+  transition: all var(--duration-fast) ease;
+}
+
+.p-slider .p-slider-handle:hover {
+  transform: scale(1.1);
+}
+
+/* Checkbox Components */
+.p-checkbox .p-checkbox-box {
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) ease;
+}
+
+.p-checkbox .p-checkbox-box:hover {
+  border-color: theme('colors.primary.500');
+}
+
+/* Avatar Components */
+.p-avatar {
+  transition: all var(--duration-fast) ease;
+}
+
+.p-avatar:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,108 @@
+/* Form Components */
+
+@layer components {
+  /* Form field container */
+  .form-field {
+    @apply relative mb-4;
+  }
+  
+  /* Form labels */
+  .form-label {
+    @apply block text-sm font-medium text-theme-primary mb-2;
+  }
+  
+  .form-label-required::after {
+    content: ' *';
+    color: theme('colors.red.500');
+  }
+  
+  /* Form inputs */
+  .form-input {
+    @apply w-full px-3 py-2 border border-theme rounded-md;
+    @apply bg-theme-primary text-theme-primary;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+    @apply transition-colors duration-200;
+    @apply placeholder:text-theme-tertiary;
+  }
+  
+  .form-input:disabled {
+    @apply bg-theme-tertiary text-theme-tertiary cursor-not-allowed;
+  }
+  
+  .form-input.error {
+    @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+  }
+  
+  /* Form textarea */
+  .form-textarea {
+    @apply form-input resize-vertical min-h-[100px];
+  }
+  
+  /* Form select */
+  .form-select {
+    @apply form-input appearance-none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Form error message */
+  .form-error {
+    @apply text-red-600 text-sm mt-1;
+  }
+  
+  /* Form help text */
+  .form-help {
+    @apply text-theme-tertiary text-sm mt-1;
+  }
+  
+  /* Form group */
+  .form-group {
+    @apply space-y-4;
+  }
+  
+  /* Inline form */
+  .form-inline {
+    @apply flex items-center space-x-4;
+  }
+  
+  .form-inline .form-field {
+    @apply mb-0 flex-1;
+  }
+  
+  /* Checkbox and radio styles */
+  .form-checkbox,
+  .form-radio {
+    @apply w-4 h-4 text-primary-600 border-theme rounded;
+    @apply focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply transition-colors duration-200;
+  }
+  
+  .form-radio {
+    @apply rounded-full;
+  }
+  
+  /* Switch styles */
+  .form-switch {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full;
+    @apply bg-gray-200 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  
+  .form-switch:checked {
+    @apply bg-primary-600;
+  }
+  
+  .form-switch::before {
+    content: '';
+    @apply inline-block h-4 w-4 transform rounded-full bg-white;
+    @apply transition-transform duration-200;
+    @apply translate-x-1;
+  }
+  
+  .form-switch:checked::before {
+    @apply translate-x-6;
+  }
+}
