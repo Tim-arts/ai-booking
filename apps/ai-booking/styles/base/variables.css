@@ -1,6 +1,5 @@
 /* CSS Custom Properties for Theme System */
 
-/* Light theme variables (default) */
 :root {
   /* Background colors */
   --bg-primary: #ffffff;
@@ -14,40 +13,10 @@
 
   /* Border colors */
   --border-color: #e5e7eb;
-  --border-light: #f3f4f6;
 
   /* Shadow colors */
   --shadow-color: rgba(0, 0, 0, 0.1);
   --shadow-light: rgba(0, 0, 0, 0.05);
-
-  /* Animation durations */
-  --duration-fast: 0.15s;
-  --duration-normal: 0.3s;
-  --duration-slow: 0.6s;
-  
-  /* Spacing scale */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-  
-  /* Border radius scale */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  
-  /* Z-index scale */
-  --z-dropdown: 1000;
-  --z-sticky: 1020;
-  --z-fixed: 1030;
-  --z-modal-backdrop: 1040;
-  --z-modal: 1050;
-  --z-popover: 1060;
-  --z-tooltip: 1070;
 }
 
 /* Dark theme variables */
@@ -60,7 +29,6 @@
     --text-secondary: #d1d5db;
     --text-tertiary: #9ca3af;
     --border-color: #374151;
-    --border-light: #4b5563;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-light: rgba(0, 0, 0, 0.2);
   }
@@ -75,7 +43,6 @@
   --text-secondary: #d1d5db;
   --text-tertiary: #9ca3af;
   --border-color: #374151;
-  --border-light: #4b5563;
   --shadow-color: rgba(0, 0, 0, 0.3);
   --shadow-light: rgba(0, 0, 0, 0.2);
 }
