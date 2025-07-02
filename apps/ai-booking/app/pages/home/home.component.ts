@@ -20,9 +20,12 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MessageModule } from 'primeng/message';
-import { ChipModule } from 'primeng/chip';
+import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { PanelModule } from 'primeng/panel';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { AvatarModule } from 'primeng/avatar';
 
 interface SearchForm {
   destination: string;
@@ -44,9 +47,12 @@ interface SearchForm {
     DropdownModule,
     SkeletonModule,
     MessageModule,
-    ChipModule,
+    TagModule,
     RatingModule,
     PanelModule,
+    IconFieldModule,
+    InputIconModule,
+    AvatarModule,
   ],
 })
 export class HomeComponent implements OnInit {
@@ -58,7 +64,7 @@ export class HomeComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
 
-  // Search form data - make it a public property
+  // Search form data
   public searchForm: SearchForm = {
     destination: '',
     checkIn: null,
