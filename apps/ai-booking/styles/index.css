@@ -1,23 +1,11 @@
 /* Main Stylesheet - Imports all modular CSS files */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import '../../../node_modules/primeicons/primeicons.css';
+@import 'primeicons/primeicons.css';
 
 /* Base Styles */
 @import 'base/variables.css';
 @import 'base/reset.css';
-
-/* Component Styles */
-@import 'components/buttons.css';
-@import 'components/cards.css';
-@import 'components/forms.css';
-
-/* Theme Overrides */
-@import 'themes/primeng-overrides.css';
-
-/* Utilities */
-@import 'utilities/animations.css';
-@import 'utilities/helpers.css';
 
 /* Tailwind CSS directives */
 @tailwind base;
